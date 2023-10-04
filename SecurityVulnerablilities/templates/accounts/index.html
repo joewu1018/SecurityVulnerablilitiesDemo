@@ -1,15 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Lorem ipsum dolor sit amet.</p>
-    <p>Ullam sunt sed eligendi a!</p>
-    <p>Vero unde itaque ex animi?</p>
-    <p>Fugit exercitationem consequuntur vitae nostrum.</p>
-    <input type="text" />
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}首頁{% endblock %}
+{% block content %}
+<!--css icon-->
+<main class="container" >
+    <!-- 功能選單 -->
+        <div class="row" style="justify-content: center;">
+            <a href="{% url 'XSS' %}" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/interview.png'); background-size: cover; margin-top: 80px; margin-bottom: 20px;" role="button" >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" >XSS</h3>
+            </a>
+            <a href="{% url 'CSRF' %}" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/apple.jpg'); background-size: cover; margin-top: 80px; margin-bottom: 20px;" role="button">
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" >CSRF</h3>
+            </a>
+            <a href="{% url 'XSS' %}" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/apple.jpg'); background-size: cover; margin-top: 80px; margin-bottom: 20px;" role="button" >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" >SQL Injection</h3>
+            </a>
+        </div>
+        <div class="row" style="justify-content: center;">
+            <a href="/" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/apple.jpg'); background-size: cover; margin-bottom: 20px;" role="button" >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" ></h3>
+            </a>
+            <a href="/" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/apple.jpg'); background-size: cover; margin-bottom: 20px;" role="button" >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" ></h3>
+            </a>
+            <a href="/" class="col shadow-lg " style="text-decoration: none;height:300px;width:800px;border-radius: 5px; margin: 10px;align-items: center;background-image:url('/static/images/apple.jpg'); background-size: cover; margin-bottom: 20px;" role="button" >
+                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" style="text-decoration: none;color: #fcfcfc;text-shadow: 2px 2px 4px #454545;padding-left: 5px;" ></h3>
+            </a>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
