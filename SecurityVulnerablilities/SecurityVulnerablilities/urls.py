@@ -19,5 +19,6 @@ import accounts.views as accounts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', accounts.index),
+    path('', accounts.index, name='Index'),
+    path('xss/', accounts.xss_vulnerable, name='XSS'),
 ]

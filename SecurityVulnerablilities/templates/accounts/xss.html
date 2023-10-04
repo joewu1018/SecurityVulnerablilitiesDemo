@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}首頁{% endblock %}
+{% block content %}
+<h1>什麼是 XSS？</h1>
+<p>XSS 是 Web 應用程式中的漏洞，允許執行非法客戶端腳本。從攻擊者的角度來看，XSS 攻擊是一種攻擊者將惡意用戶端腳本注入 Web 應用程式的技術。當使用者請求受影響的頁面時，惡意腳本就會被執行。惡意行為者將 XSS
+    用於各種目的，包括以下常見情況：
+    <ul>
+        <li>竊取敏感資訊</li>
+        <li>身分盜竊</li>
+        <li>遠端程式碼執行</li>
+    </ul>
+</p>
+<p>請在下方輸入&lt;script&gt;alert('XSS');&lt;/script&gt;</p>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" class="form-control" name="message"/>
+    <input type="submit" class="btn btn-primary" value="送出"/>
+</form>
+
+<p>你輸入的內容為</p>
+<p>{{ message|safe }}</p>
+{% endblock %}
