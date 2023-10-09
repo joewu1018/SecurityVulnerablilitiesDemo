@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from accounts.forms import StudentsForm
 # Create your views here.
 
 def index(request):
@@ -11,7 +11,15 @@ def xss_vulnerable(request):
     return render(request, 'accounts/xss.html', locals())
 
 def search(request):
-    return render(request, "accounts/search.html")
+    if request.method == 'POST':
+        form = StudentsForm(request.POST)
+    else:
+        form = StudentsForm()        
+    return render(request, "accounts/search.html", locals())
 
 def update(request):
-    return render(request, "accounts/update.html")
+    if request.method == 'POST':
+        form = StudentsForm(request.POST)
+    else:
+        form = StudentsForm()
+    return render(request, "accounts/update.html", locals())

@@ -15,15 +15,15 @@ class Student(models.Model):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True)
     birth_date = models.DateField(blank=True,null=True)
-    LECTURE_CHOICES = (
-        ('CB', '計算機概論'),
-        ('student', '計算機網路'),
-        ('engineer', '微積分'),
-        ('developer', '線性代數'),
-        ('designer', '離散數學'),
-        ('accountant', '程式設計'),
+    SUBJECT_CHOICES = (
+        ('IC', '計算機概論'),
+        ('CN', '計算機網路'),
+        ('C', '微積分'),
+        ('LN', '線性代數'),
+        ('DM', '離散數學'),
+        ('P', '程式設計'),
     )
-    lecture = models.CharField(max_length=100, choices=LECTURE_CHOICES, blank=True, null=True)  # 職業欄位，最大長度為 100，選項限定在 OCCUPATION_CHOICES 中
+    subject = models.CharField(max_length=100, choices=SUBJECT_CHOICES, blank=True, null=True)
     
     def __str__(self):
         return self.name

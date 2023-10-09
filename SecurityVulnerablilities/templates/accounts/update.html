@@ -1,30 +1,43 @@
-{% extends "base.html" %} 
-{% block title %}新增{% endblock %} 
+{% extends "base.html" %}
+{% block title %}新增{% endblock %}
 {% block content%}
+
 <form action="" method="post">
-  <label>姓名</label>
-  <input class="form-control" type="text" />
-  <label>學號</label>
-  <input class="form-control" type="text" />
-  <label>性別</label>
-  <select class="form-control">
-    <option value="">請選擇性別</option>
-    <option value="M">男</option>
-    <option value="F">女</option>
-  </select>
-  <label>入學年分</label>
-  <input class="form-control" type="text" />
-  <label>出生年月日</label>
-  <input class="form-control" type="date" />
-  <label>平均成績</label>
-  <input class="form-control" type="text" />
-  <label>電話</label>
-  <input class="form-control" type="text" />
-  <label>電子郵件</label>
-  <input class="form-control" type="text" />
-  <label>修習課程</label>
-  <input class="form-control" type="text" />
-  <button class="btn btn-success" type="submit">新增</button>
+  {% csrf_token %}
+  <div>
+    {{ form.name }}
+    <label for="email">{{ form.name.label }}</label>
+  </div>
+  <div>
+    {{ form.studentId }}
+    <label for="email">{{ form.studentId.label }}</label>
+  </div>
+  <div>
+    {{ form.register_year }}
+    <label for="register_year">{{ form.register_year.label }}</label>
+  </div>
+  <div>
+    {{ form.phone_number }}
+    <label for="phone_number">{{ form.phone_number.label }}</label>
+  </div>
+  <div>
+    {{ form.email }}
+    <label for="email">{{ form.email.label }}</label>
+  </div>
+  <div>
+    {{ form.gender }}
+    <label for="gender">{{ form.gender.label }}</label>
+  </div>
+  <div>
+    {{ form.birth_date }}
+    <label for="birth_date">{{ form.birth_date.label }}</label>
+  </div>
+  <div>
+    {{ form.subject }}
+    <label for="subject">{{ form.subject.label }}</label>
+  </div>
+
+  <input type="submit" class="btn btn-success" value="存檔">
 </form>
 
 {% endblock %}
