@@ -13,8 +13,14 @@
 <p>請在下方輸入&lt;script&gt;alert('XSS');&lt;/script&gt;</p>
 <form method="POST">
     {% csrf_token %}
-    <input type="text" class="form-control" name="message"/>
-    <input type="submit" class="btn btn-primary" value="送出"/>
+    <div class="row">
+        <div class="col-4">
+            <input type="text" class="form-control" name="message"/>
+        </div>
+        <div class="col-4">
+            <input type="submit" class="btn btn-primary" value="送出"/>
+        </div>
+    </div>
 </form>
 
 <p>你輸入的內容為</p>

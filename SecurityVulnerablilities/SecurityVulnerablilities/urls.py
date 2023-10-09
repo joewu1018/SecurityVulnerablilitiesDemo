@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', accounts.index, name='Index'),
     path('xss/', accounts.xss_vulnerable, name='XSS'),
+    path('search/', accounts.search, name='Search'),
+    path('update/', accounts.update, name='Update'),
 ]
