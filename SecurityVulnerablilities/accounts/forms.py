@@ -83,7 +83,7 @@ class StudentsForm(forms.Form):
 
     birth_date = forms.DateField(
         label='生日',
-        widget=forms.DateInput(attrs={'class': 'form-control'})
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
     )
 
     subject = forms.ChoiceField(
