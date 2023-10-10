@@ -1,27 +1,33 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block title %}查詢{% endblock %} 
 {% block content%}
-
+<h2>學生歷年成績查詢</h2>
 <form action="" method="post">
   {% csrf_token %}
-  <div>
-    {{ form.name }}
-    <label for="email">{{ form.name.label }}</label>
+  <div class="form">
+    <div class="row">
+        <div class="text col-sm-6">
+          <label for="name">{{ form.name.label }}</label>
+          {{ form.name }}
+        </div>
+        <div class="text col-sm-6">
+          <label for="studentId">{{ form.studentId.label }}</label>
+          {{ form.studentId }}
+        </div>
+    </div>
+    
+    <div class="text">
+      <label for="register_year">{{ form.register_year.label }}</label>
+      {{ form.register_year }}
+    </div>
+    <div class="text">
+      <label for="subject">{{ form.subject.label }}</label>
+      {{ form.subject }}
+    </div>
+  <div class="button">
+    <input type="submit" class="btn btn-success" value="查詢">
   </div>
-  <div>
-    {{ form.studentId }}
-    <label for="email">{{ form.studentId.label }}</label>
   </div>
-  <div>
-    {{ form.gender }}
-    <label for="gender">{{ form.gender.label }}</label>
-  </div>
-  <div>
-    {{ form.subject }}
-    <label for="subject">{{ form.subject.label }}</label>
-  </div>
-
-  <input type="submit" class="btn btn-success" value="查詢">
 </form>
 
 {% endblock %}
