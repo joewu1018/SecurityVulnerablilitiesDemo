@@ -19,7 +19,14 @@ import accounts.views as accounts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 首頁
     path('', accounts.index, name='Index'),
+    # 登入
+    path('login/', accounts.sign_in, name='Login'),
+    # 登出
+    path('logout/',accounts.log_out, name='Logout'),
+    # 註冊
+    path('register/', accounts.register, name='Register'),
     path('xss/', accounts.xss_vulnerable, name='XSS'),
     path('search/', accounts.search, name='Search'),
     path('update/', accounts.update, name='Update'),
