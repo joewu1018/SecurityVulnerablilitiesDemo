@@ -78,21 +78,21 @@ WSGI_APPLICATION = 'SecurityVulnerablilities.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'SVDemo',
-        'USER': os.getenv("MSSQL_USER"),
-        'PASSWORD': os.getenv("MSSQL_PASSWORD"),
-        'HOST': '127.0.0.1',
-        'PORT': '1433',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'mssql',
+    #     'NAME': 'SVDemo',
+    #     'USER': os.getenv("MSSQL_USER"),
+    #     'PASSWORD': os.getenv("MSSQL_PASSWORD"),
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '1433',
+    #     'OPTIONS': {
+    #         'driver': 'ODBC Driver 17 for SQL Server',
+    #     },
+    # }
 }
 
 

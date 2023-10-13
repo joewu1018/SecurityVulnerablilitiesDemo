@@ -17,8 +17,8 @@
     </div>
     
     <div class="text">
-      <label for="register_year">{{ form.register_year.label }}</label>
-      {{ form.register_year }}
+      <label for="register_year">{{ form.semester.label }}</label>
+      {{ form.semester }}
     </div>
     <div class="text">
       <label for="subject">{{ form.subject.label }}</label>
@@ -29,5 +29,26 @@
   </div>
   </div>
 </form>
+
+<table class="table table-striped" style="margin-top:20px">
+    <thead>
+        <tr>
+            <th>Semester</th>
+            <th>Student</th>
+            <th>Subject</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.semester }}</td>
+                <td>{{ result.student.studentId }} - {{ result.student.name }}</td>
+                <td>{{ result.get_subject_display }}</td>
+                <td>{{ result.grade }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

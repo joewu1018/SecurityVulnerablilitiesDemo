@@ -27,7 +27,6 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-
 class LoginForm(forms.Form):
 
     username = forms.CharField(
@@ -47,11 +46,17 @@ class LoginForm(forms.Form):
     )
 
 class StudentsForm(forms.Form):
+    user = forms.ChoiceField(
+        label='使用者', 
+        choices=[('', '請選擇使用者')] + [(user.id, user.username) for user in User.objects.all()],
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
     name = forms.CharField(
         label='姓名', 
         max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+
     studentId = forms.CharField(
         label='學號', 
         max_length=100,
@@ -86,8 +91,30 @@ class StudentsForm(forms.Form):
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
     )
 
+class SearchForm(forms.Form):
+    name = forms.CharField(
+        label='姓名', 
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    studentId = forms.CharField(
+        label='學號', 
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    semester = forms.IntegerField(
+        label='學期', 
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
     subject = forms.ChoiceField(
         label='科目',
+        required=False,
         choices=[('', '請選擇科目'), ('IC', '計算機概論'), ('CN', '計算機網路'), ('C', '微積分'), ('LN', '線性代數'), ('DM', '離散數學'), ('P', '程式設計'),],
         widget=forms.Select(attrs={'class': 'form-control'})
     )
