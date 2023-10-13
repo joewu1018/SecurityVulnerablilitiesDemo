@@ -50,23 +50,10 @@ def register(request):
     form = RegisterForm()
     if request.method == "POST":
         form = RegisterForm(request.POST)
-        print('PSOT')
         if form.is_valid():
-            print('VALID')
-            # 儲存 User 物件到資料庫並取得已創建的 User 物件
             user = form.save()
-
-            # 創建 UserProfile 物件
-            # profile = UserProfile()
-            # profile.user = User.objects.get(id=user.id)
-            # profile.user_name = user.username
-            # profile.email = user.email
-
-            # profile.save()  # 儲存 UserProfile 物件到資料庫
-
             return HttpResponse('<script>alert("註冊成功！"); window.location.href = "/login";</script>')
         else:
-            print('INVALID')
             message = ''
             for error in form.errors:
                 message += (error + "\n")
@@ -84,12 +71,15 @@ def grade_search(request):
         results = Student.objects.raw('SELECT * FROM accounts_student WHERE username = %s', ['admin'])
         print(results)
     else:
-        form = SearchForm()        
+        form = SearchForm()
     return render(request, "accounts/grade_search.html", locals())
 
 def student_maintenance(request):
+    student = Student.objects.get(id=request.user.id)
     if request.method == 'POST':
-        form = StudentsForm(request.POST)
+        form = StudentsForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
     else:
-        form = StudentsForm()
+        form = StudentsForm(instance=student)
     return render(request, "accounts/student_maintenance.html", locals())

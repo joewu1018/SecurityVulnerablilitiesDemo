@@ -28,4 +28,4 @@ class Grade(models.Model):
     grade = models.FloatField()
     
     def __str__(self):
-        return self.student.name + ' ' + self.subject + ' ' + str(self.grade)
+        return self.student.username + ' ' + self.subject + ' ' + str(self.grade)

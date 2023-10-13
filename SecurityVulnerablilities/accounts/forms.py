@@ -25,7 +25,7 @@ class RegisterForm(UserCreationForm):
     )
 
     class Meta:
-        model = User
+        model = Student
         fields = ('username', 'email', 'password1', 'password2')
 
 class LoginForm(forms.Form):
@@ -45,52 +45,29 @@ class LoginForm(forms.Form):
         required=False, 
         widget=forms.CheckboxInput()
     )
-
-class StudentsForm(forms.Form):
-    user = forms.ChoiceField(
-        label='使用者', 
-        choices=[('', '請選擇使用者')] + [(user.id, user.username) for user in Student.objects.all()],
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-    user_name = forms.CharField(
-        label='姓名', 
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
-    studentId = forms.CharField(
-        label='學號', 
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
-    register_year = forms.IntegerField(
-        label='入學年份', 
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
-    phone_number = forms.CharField(
-        label='電話', 
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
-    email = forms.EmailField(
-        label='信箱',
-        max_length=100,
-        widget=forms.EmailInput(attrs={'class': 'form-control'})
-    )
-
-    gender = forms.ChoiceField(
-        label='性別',
-        choices=[('', '請選擇性別'), ('M', '男性'), ('F', '女性')],
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
-
-    birth_date = forms.DateField(
-        label='生日',
-        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
-    )
+    
+class StudentsForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['username', 'studentId', 'register_year', 'phone_number', 'email', 'gender', 'birth_date']
+        labels = {
+            'username': '姓名',
+            'studentId': '學號',
+            'register_year': '入學年份',
+            'phone_number': '電話',
+            'email': '信箱',
+            'gender': '性別',
+            'birth_date': '生日',
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'studentId': forms.TextInput(attrs={'class': 'form-control'}),
+            'register_year': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'gender': forms.Select(attrs={'class': 'form-control'}),
+            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }
 
 class SearchForm(forms.Form):
     name = forms.CharField(
