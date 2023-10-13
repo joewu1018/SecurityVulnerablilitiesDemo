@@ -28,6 +28,6 @@ urlpatterns = [
     # 註冊
     path('register/', accounts.register, name='Register'),
     path('xss/', accounts.xss_vulnerable, name='XSS'),
-    path('search/', accounts.search, name='Search'),
-    path('update/', accounts.update, name='Update'),
+    path('grade_search/', accounts.grade_search, name='GradeSearch'),
+    path('student_maintenance/', accounts.student_maintenance, name='StudentMaintenance'),
 ]

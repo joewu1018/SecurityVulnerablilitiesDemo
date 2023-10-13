@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from accounts.forms import RegisterForm, LoginForm, StudentsForm
+from accounts.models import Student, Grade
+from accounts.forms import RegisterForm, LoginForm, StudentsForm, SearchForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -49,8 +50,9 @@ def register(request):
     form = RegisterForm()
     if request.method == "POST":
         form = RegisterForm(request.POST)
+        print('PSOT')
         if form.is_valid():
-            
+            print('VALID')
             # 儲存 User 物件到資料庫並取得已創建的 User 物件
             user = form.save()
 
@@ -64,10 +66,10 @@ def register(request):
 
             return HttpResponse('<script>alert("註冊成功！"); window.location.href = "/login";</script>')
         else:
+            print('INVALID')
             message = ''
             for error in form.errors:
                 message += (error + "\n")
-            return HttpResponse('<script>alert("註冊失敗！"'+ message +');</script>')
 
     return render(request, 'accounts/register.html', locals())
 
@@ -76,16 +78,18 @@ def xss_vulnerable(request):
         message = request.POST.get('message')
     return render(request, 'accounts/xss.html', locals())
 
-def search(request):
+def grade_search(request):
     if request.method == 'POST':
-        form = StudentsForm(request.POST)
+        form = SearchForm(request.POST)
+        results = Student.objects.raw('SELECT * FROM accounts_student WHERE name = %s', ['admin'])
+        print(results)
     else:
-        form = StudentsForm()        
-    return render(request, "accounts/search.html", locals())
+        form = SearchForm()        
+    return render(request, "accounts/grade_search.html", locals())
 
-def update(request):
+def student_maintenance(request):
     if request.method == 'POST':
         form = StudentsForm(request.POST)
     else:
         form = StudentsForm()
-    return render(request, "accounts/update.html", locals())
+    return render(request, "accounts/student_maintenance.html", locals())
