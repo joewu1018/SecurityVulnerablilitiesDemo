@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from accounts.models import Student
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
@@ -48,10 +49,10 @@ class LoginForm(forms.Form):
 class StudentsForm(forms.Form):
     user = forms.ChoiceField(
         label='使用者', 
-        choices=[('', '請選擇使用者')] + [(user.id, user.username) for user in User.objects.all()],
+        choices=[('', '請選擇使用者')] + [(user.id, user.username) for user in Student.objects.all()],
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    name = forms.CharField(
+    user_name = forms.CharField(
         label='姓名', 
         max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control'})

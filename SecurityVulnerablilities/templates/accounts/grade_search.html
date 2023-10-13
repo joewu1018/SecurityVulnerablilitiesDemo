@@ -43,7 +43,7 @@
         {% for result in results %}
             <tr>
                 <td>{{ result.semester }}</td>
-                <td>{{ result.student.studentId }} - {{ result.student.name }}</td>
+                <td>{{ result.studentId }} - {{ result.username }}</td>
                 <td>{{ result.get_subject_display }}</td>
                 <td>{{ result.grade }}</td>
             </tr>

@@ -81,7 +81,7 @@ def xss_vulnerable(request):
 def grade_search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
-        results = Student.objects.raw('SELECT * FROM accounts_student WHERE name = %s', ['admin'])
+        results = Student.objects.raw('SELECT * FROM accounts_student WHERE username = %s', ['admin'])
         print(results)
     else:
         form = SearchForm()        

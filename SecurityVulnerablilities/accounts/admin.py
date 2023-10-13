@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Student, Grade
 
 class AccountAdmin(admin.ModelAdmin):
-	list_display = ("id", "user", "name", "studentId", "email")
+	list_display = ("username", "studentId", "email", "is_staff")
 	list_filter = ("gender",)
 	search_fields=('id',)
 
