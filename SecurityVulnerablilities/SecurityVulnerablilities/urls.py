@@ -30,4 +30,5 @@ urlpatterns = [
     path('xss/', accounts.xss_vulnerable, name='XSS'),
     path('grade_search/', accounts.grade_search, name='GradeSearch'),
     path('student_maintenance/', accounts.student_maintenance, name='StudentMaintenance'),
+    path('download/', accounts.download_file, name='DownloadFile'),
 ]

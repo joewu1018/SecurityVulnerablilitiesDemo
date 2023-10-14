@@ -1,9 +1,10 @@
-from django.http import HttpResponse
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import render, redirect
 from accounts.models import Student, Grade
 from accounts.forms import RegisterForm, LoginForm, StudentsForm, SearchForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import os
 
 
 # 首頁
@@ -59,6 +60,16 @@ def register(request):
                 message += (error + "\n")
 
     return render(request, 'accounts/register.html', locals())
+
+# 下載隱藏檔案
+def download_file(request):
+    file_path = 'static/password.txt'
+    file_name = os.path.basename(file_path)
+    file = open(file_path, 'rb')
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+    return response
 
 def xss_vulnerable(request):
     if request.method == 'POST':

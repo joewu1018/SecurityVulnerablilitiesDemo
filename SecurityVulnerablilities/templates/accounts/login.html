@@ -6,6 +6,9 @@
 <div class="center">
 	<h1>登入</h1>
 	<form method="post" id="login-form">
+		<div style="display: none;">
+			<a href="{% url 'DownloadFile' %}" class="btn btn-primary">下載</a>
+		</div>
 		{% csrf_token %}
 		<div class="txt_field">
 			{{ form.username }}
