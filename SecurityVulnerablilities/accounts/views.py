@@ -1,7 +1,7 @@
 from django.http import FileResponse, HttpResponse
 from django.shortcuts import render, redirect
-from accounts.models import Student, Grade
-from accounts.forms import RegisterForm, LoginForm, StudentsForm, SearchForm
+from accounts.models import Student
+from accounts.forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import os
@@ -70,27 +70,3 @@ def download_file(request):
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = f'attachment; filename="{file_name}"'
     return response
-
-def xss_vulnerable(request):
-    if request.method == 'POST':
-        message = request.POST.get('message')
-    return render(request, 'accounts/xss.html', locals())
-
-def grade_search(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        results = Student.objects.raw('SELECT * FROM accounts_student WHERE username = %s', ['admin'])
-        print(results)
-    else:
-        form = SearchForm()
-    return render(request, "accounts/grade_search.html", locals())
-
-def student_maintenance(request):
-    student = Student.objects.get(id=request.user.id)
-    if request.method == 'POST':
-        form = StudentsForm(request.POST, instance=student)
-        if form.is_valid():
-            form.save()
-    else:
-        form = StudentsForm(instance=student)
-    return render(request, "accounts/student_maintenance.html", locals())

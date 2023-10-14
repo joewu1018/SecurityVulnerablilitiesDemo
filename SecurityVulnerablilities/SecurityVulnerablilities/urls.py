@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import accounts.views as accounts
+import students.views as students
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,8 +28,13 @@ urlpatterns = [
     path('logout/',accounts.log_out, name='Logout'),
     # 註冊
     path('register/', accounts.register, name='Register'),
-    path('xss/', accounts.xss_vulnerable, name='XSS'),
-    path('grade_search/', accounts.grade_search, name='GradeSearch'),
-    path('student_maintenance/', accounts.student_maintenance, name='StudentMaintenance'),
+    # 下載檔案
     path('download/', accounts.download_file, name='DownloadFile'),
+    # 學生成績查詢
+    path('grade_search/', students.grade_search, name='GradeSearch'),
+    # 學生資料維護
+    path('student_maintenance/', students.student_maintenance, name='StudentMaintenance'),
+    # XSS
+    path('xss/', students.xss_vulnerable, name='XSS'),
+    
 ]
