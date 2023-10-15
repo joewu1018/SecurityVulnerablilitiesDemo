@@ -10,6 +10,9 @@
         <li>遠端程式碼執行</li>
     </ul>
 </p>
+
+<h3>反射型XSS</h3>
+<p>解釋內容</p>
 <p>請在下方輸入&lt;script&gt;alert('XSS');&lt;/script&gt;</p>
 <form method="POST">
     {% csrf_token %}
@@ -25,4 +28,33 @@
 
 <p>你輸入的內容為</p>
 <p>{{ message|safe }}</p>
+
+<h3>儲存型XSS</h3>
+<p>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如<script></script>  等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
+<div class="col-md-10">
+    <p>發表您的問題</p>
+    <input type="text" class="form-control" name="content" placeholder="發表問題..."style="width: 80%;"></input>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary" style="width: 70%;">提問</button>
+  </div>
+</div>
+
+<h3>DOM型XSS</h3>
+<p>用以描述 HTML 文件的表示法，它讓我們可以使用 JavaScript 動態產生完整的網頁，而不必透過伺服器。<br>
+因此 DOM-Based XSS 就是指網頁上的 JavaScript 在執行過程中，沒有詳細檢查資料使得操作 DOM 的過程代入了惡意指令。</p>
+<div>
+    <script>
+        var create_text = function() {
+            var name = document.getElementById('name').value;
+            document.getElementById('show_name').innerHTML = name;
+        }
+    </script>
+    <h5>Hi <span id="show_name"></span></h5>
+    <input id="name" type="text" class="form-control"/>
+    <div class="col-md-2">
+        <button onclick="create_text();" type="submit" class="btn btn-primary">Say Hi</button>
+    </div>
+</div>
+
+
 {% endblock %}
