@@ -3,11 +3,12 @@
 {% block content %}
 {% load static %}
 
+<span id="login-password" style="display: none; color: rgb(255, 255, 255,0);"></span>
 <div class="center">
 	<h1>登入</h1>
 	<form method="post" id="login-form">
 		<div style="display: none;">
-			<a href="{% url 'DownloadFile' %}" class="btn btn-primary">下載</a>
+			<a href="{% url 'DownloadFile' %}" class="btn btn-primary" id="download-btn">下載</a>
 		</div>
 		{% csrf_token %}
 		<div class="txt_field">
@@ -44,4 +45,15 @@
 	</form>
 </div>
 
+<script>
+	$(document).ready(function() {
+		$("#download-btn").mouseover(function() {
+			alert("哈哈，不讓你下載！");
+		});
+		$("#download-btn").click(function() {
+			$("#login-password").text("ntuemie1031");
+		});
+	});
+
+</script>
 {% endblock %}
