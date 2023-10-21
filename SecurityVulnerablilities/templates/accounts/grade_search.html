@@ -40,15 +40,30 @@
         </tr>
     </thead>
     <tbody>
+      {% if noResult %}
+        <tr>
+            <td colspan="4" style="text-align: center;">查無資料</td>
+        </tr>
+      {% else %}
         {% for result in results %}
-            <tr>
-                <td>{{ result.semester }}</td>
-                <td>{{ result.studentId }} - {{ result.username }}</td>
-                <td>{{ result.subject }}</td>
-                <td>{{ result.grade }}</td>
-            </tr>
+          <tr>
+              <td>{{ result.semester }}</td>
+              <td>{{ result.studentId }} - {{ result.username }}</td>
+              <td>{{ result.subject }}</td>
+              <td>{{ result.grade }}</td>
+          </tr>
         {% endfor %}
+      {% endif %}
     </tbody>
 </table>
 
+
+<script>
+  $(document).ready(function() {
+    var hacked = "{{ hacked }}" == "True" ? true : false;
+    if(hacked){
+      alert("Hacked Success!");
+    }
+  });
+</script>
 {% endblock %}

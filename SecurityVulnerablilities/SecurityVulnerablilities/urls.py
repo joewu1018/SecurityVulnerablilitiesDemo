@@ -36,5 +36,6 @@ urlpatterns = [
     path('student_maintenance/', students.student_maintenance, name='StudentMaintenance'),
     # XSS
     path('xss/', students.xss_vulnerable, name='XSS'),
-    
+    # SQL Injection
+    path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
 ]
