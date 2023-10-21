@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}首頁{% endblock %}
+{% block content %}
+<h1>什麼是 SQL Injection？</h1>
+<p>簡而言之，這是對您的應用程式的攻擊，攻擊者嘗試在您的資料庫上執行其他命令。之所以稱為 SQL 注入，是因為攻擊者透過使用者輸入註入SQL 命令，從而改變應用程式的行為方式。這可能會導致資訊外洩、未經授權的訪問，甚至擦除您的所有資料。 
+現在讓我們來看一個例子。假設您有一個 API 來驗證使用者身份，並且在您的程式碼中執行以下查詢： 
+</p>
+<code>
+    select * from users where username='myuser' and password ='secret';
+</code>
+<br>
+<br>
+<p>假設使用者輸入以下字串：'secret' or '1'='1'。然後我們有這個： </p>
+<code>
+    select * from users where username='myuser' and password ='secret' or '1'='1';
+</code>
+<br>
+<br>
+<p>
+從使用者名稱='myuser'和密碼=' secret'或'1'='1 '的使用者中選擇*；
+上面的語句是一個有效的SQL語句。然而，由於我們加入了條件'1'='1'，該語句將始終評估為 TRUE。結果，我們繞過了密碼安全。 
+這只是一個基本範例。如需更深入的概述，請查看這篇文章，其中提供了 SQL 注入的更多範例以及如何防止它們。
+</p>
+<img src="https://i.imgur.com/p6k1tYt.jpg" alt="">
+
+<h1>Mission</h1>
+<p>請至<a href="{%url 'GradeSearch'%}">學生歷年成績查詢</a>頁面利用漏洞查出不是自己的成績 & 撈出所有資料</p>
+{% endblock %}

@@ -29,25 +29,26 @@ class SearchForm(forms.Form):
         label='姓名', 
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'disabled': 'disabled'})
     )
 
     studentId = forms.CharField(
         label='學號', 
         max_length=100,
         required=False,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'disabled': 'disabled'})
     )
 
     semester = forms.IntegerField(
         label='學期', 
         required=False,
+        initial=109,
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
     subject = forms.ChoiceField(
         label='科目',
         required=False,
-        choices=[('', '請選擇科目'), ('IC', '計算機概論'), ('CN', '計算機網路'), ('C', '微積分'), ('LN', '線性代數'), ('DM', '離散數學'), ('P', '程式設計'),],
+        choices=[('IC', '計算機概論'), ('CN', '計算機網路'), ('C', '微積分'), ('LN', '線性代數'), ('DM', '離散數學'), ('P', '程式設計'),],
         widget=forms.Select(attrs={'class': 'form-control'})
     )
