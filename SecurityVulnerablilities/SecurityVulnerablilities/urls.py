@@ -38,4 +38,6 @@ urlpatterns = [
     path('xss/', students.xss_vulnerable, name='XSS'),
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
+    # Quiz
+    path('quiz/', students.quiz,name='Quiz')
 ]

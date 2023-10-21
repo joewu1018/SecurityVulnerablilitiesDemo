@@ -77,3 +77,7 @@ def xss_vulnerable(request):
 # SQL Injection
 def sql_injection_vulnerable(request):
     return render(request, 'accounts/sql_injection.html', locals())
+
+# Quiz
+def quiz(request):
+    return render(request, 'accounts/quiz.html', locals())
