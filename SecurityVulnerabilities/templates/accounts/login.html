@@ -7,9 +7,6 @@
 <div class="center">
 	<h1>登入</h1>
 	<form method="post" id="login-form">
-		<div style="display: none;">
-			<a href="{% url 'DownloadFile' %}" class="btn btn-primary" id="download-btn">下載</a>
-		</div>
 		{% csrf_token %}
 		<div class="txt_field">
 			{{ form.username }}
@@ -20,10 +17,15 @@
 			<label>{{ form.password.label }}</label>
 		</div>
 		<div class="row">
-			<div class="col-7">
+			<div class="col-6">
 				{{ form.remember_me }}
 				<span></span>
 				<label>{{ form.remember_me.label }}</label>
+			</div>
+			<div class="col-6" style="text-align: right;">
+				<div style="display: none;">
+					<a href="{% url 'DownloadFile' %}" class="btn btn-warning" id="download-btn">帳號底加啦～</a>
+				</div>
 			</div>
 		</div>
 		{% if form.errors %}
