@@ -63,7 +63,7 @@ def register(request):
 
 # 下載隱藏檔案
 def download_file(request):
-    file_path = 'static/password.txt'
+    file_path = 'static/username.txt'
     file_name = os.path.basename(file_path)
     file = open(file_path, 'rb')
     response = FileResponse(file)
