@@ -83,7 +83,7 @@ def sql_injection_vulnerable(request):
 
 # Quiz
 def devtools(request):
-    return render(request, 'students/quiz.html', locals())
+    return render(request, 'students/devtools.html', locals())
 
 # Devtools Element頁籤
 def devtools_elements(request):
