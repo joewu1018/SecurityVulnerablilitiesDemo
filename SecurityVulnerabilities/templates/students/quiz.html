@@ -14,26 +14,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="alertModalLabel">警告</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <!-- 这里放置你的警告消息内容 -->
-              <p>这是一个警告消息。</p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-          </div>
-      </div>
-  </div>
-</div>
-
 <script>
   $(document).ready(function () {
     function question1() {
@@ -55,39 +35,6 @@
       console.table(artists);
     }
     question1();
-
-    $("#check-btn").click(checkName);
-
-    function checkName () {
-      const userAnswer = document.getElementById("textInput").value;
-      const correctAnswer = "Chaim,Soutine"; // 設定正確答案，這裡替換為你想要的答案
-
-      const output = document.getElementById("output");
-      const resultText = document.getElementById("resultText");
-
-      if (userAnswer === correctAnswer) {
-        resultText.textContent = "恭喜，答對了！";
-      } else {
-        resultText.textContent = "很抱歉，答案不正確。請再試一次。";
-      }
-
-      output.style.display = "block";
-    };
-    $("#alertModal").modal("show");
-
-    function getAjaxResponse(){
-      $.ajax({
-        url: "{% url 'AjaxJsonResponse' %}",
-        type: "POST",
-        success: function(response){
-          console.log(response);
-        },
-        error: function(error){
-          console.log(error);
-        }
-      });
-    }
-    getAjaxResponse();
   });
 </script>
 

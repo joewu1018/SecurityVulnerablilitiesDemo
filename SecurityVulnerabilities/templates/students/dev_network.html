@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Dev Network{% endblock %}
+{% block content%}
+
+<h1>Network</h1>
+<h4>顯示API、AJAX網頁請求和回應的詳細資訊</h4>
+<br>
+<h2>Mission <span class="badge bg-danger">Incomplete 1/2</span></h2>
+<h4>任務1</h4>
+<p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    點我挑戰
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div>
+                        <p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊
+                            hint: 有些字被編碼了可以<a href="https://toolbox.googleapps.com/apps/encode_decode/"
+                                target="_blank">前往解碼</a>，選擇UTF16解碼
+                            <br>
+                            <br>
+                            目標:請輸入大安區2023/10/22 12:00-18:00的降雨機率
+                        </p>
+
+                        <button class="btn btn-primary" id="getAjaxResponse-btn">發送請求</button>
+                    </div>
+                    <div style="margin-top: 5%;">
+                        <input type="text" name="answer" class="form-control">
+                        <input type="hidden" name="question" value="AjaxJsonResponse">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+                    <button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // 發送請求按鈕事件
+        $("#getAjaxResponse-btn").click(function () {
+            event.preventDefault();
+            getAjaxResponse();
+        });
+
+        // 提交按鈕事件
+        $("#submit-btn").click(function () {
+            event.preventDefault();
+            checkAnswer();
+        });
+
+        // 取得Ajax回應
+        function getAjaxResponse() {
+            $.ajax({
+                url: "{% url 'AjaxJsonResponse' %}",
+                type: "POST",
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        // 檢查答案
+        function checkAnswer() {
+            $.ajax({
+                url: "{% url 'CheckAnswer' %}",
+                type: "POST",
+                data: {
+                    answer: $("input[name='answer']").val(),
+                    question: $("input[name='question']").val(),
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+                success: function (response) {
+                    if (response.correct) {
+                        alert("答案正確");
+                    } else {
+                        alert("答案錯誤");
+                    }
+                },
+            });
+        }
+    });
+</script>
+{% endblock %}

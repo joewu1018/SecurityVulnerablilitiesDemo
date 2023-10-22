@@ -82,8 +82,34 @@ def sql_injection_vulnerable(request):
     return render(request, 'students/sql_injection.html', locals())
 
 # Quiz
-def quiz(request):
+def devtools(request):
     return render(request, 'students/quiz.html', locals())
+
+# Devtools Element頁籤
+def devtools_elements(request):
+    return render(request, 'students/dev_elements.html', locals())
+
+# Devtools Console頁籤
+def devtools_console(request):
+    return render(request, 'students/dev_console.html', locals())
+
+# Devtools Source頁籤
+def devtools_source(request):
+    return render(request, 'students/dev_source.html', locals())
+
+# Devtools Network頁籤
+def devtools_network(request):
+    return render(request, 'students/dev_network.html', locals())
+
+# 檢查答案
+def check_answer(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        answer = request.POST.get('answer')
+        if question == 'AjaxJsonResponse':
+            if answer == '10':
+                return JsonResponse({'correct': True})
+    return JsonResponse({'correct': False})
 
 # Ajax
 @csrf_exempt

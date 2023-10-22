@@ -20,6 +20,8 @@ import students.views as students
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # ---------------accounts----------------
+
     # 首頁
     path('', accounts.index, name='Index'),
     # 登入
@@ -30,6 +32,9 @@ urlpatterns = [
     path('register/', accounts.register, name='Register'),
     # 下載檔案
     path('download/', accounts.download_file, name='DownloadFile'),
+
+    # ---------------students----------------
+
     # 學生成績查詢
     path('grade_search/', students.grade_search, name='GradeSearch'),
     # 學生資料維護
@@ -39,7 +44,17 @@ urlpatterns = [
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
     # Quiz
-    path('quiz/', students.quiz, name='Quiz'),
+    path('devtools/', students.devtools, name='Devtools'),
+    # Devtools Elements頁籤
+    path('devtools/elements', students.devtools_elements, name='DevElements'),
+    # Devtools Console頁籤
+    path('devtools/console', students.devtools_console, name='DevConsole'),
+    # Devtools Source頁籤
+    path('devtools/source', students.devtools_source, name='DevSource'),
+    # Devtools Network頁籤
+    path('devtools/network', students.devtools_network, name='DevNetwork'),    
     # AjaxJsonResponse
-    path('ajaxJsonResponse/', students.ajaxJsonResponse, name='AjaxJsonResponse')
+    path('ajaxJsonResponse/', students.ajaxJsonResponse, name='AjaxJsonResponse'),
+    # 檢查答案
+    path('check_answer/', students.check_answer, name='CheckAnswer')
 ]
