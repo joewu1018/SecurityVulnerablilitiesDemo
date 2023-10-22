@@ -1,27 +1,38 @@
-{% extends "base.html" %} {% block title %}Quiz{% endblock %} {% block content%}
+{% extends "base.html" %}
+{% block title %}Quiz{% endblock %}
+{% block content%}
 <h2>請在console中找出1的姓名</h2>
-<input style="margin: 12px, 12px" class="form-control" type="text" /><button
-  onclick="checkName()"
-  class="btn btn-primary"
-  id="download-btn"
->
-  送出
-</button>
+<input style="margin: 12px, 12px" class="form-control" type="text" />
+<button class="btn btn-primary" id="check-btn">送出</button>
 
 <h2>請輸入按鈕的元素大小</h2>
 <div>
-  <input style="margin: 12px, 12px" class="form-control" type="int" /><button
-    class="btn btn-primary"
-    id="download-btn"
-  >
-    送出
-  </button>
+  <input style="margin: 12px, 12px" class="form-control" type="int" />
+  <button class="btn btn-primary" id="download-btn">送出</button>
   <div id="output">
     <p id="resultText"></p>
   </div>
 </div>
 
-<h2></h2>
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="alertModalLabel">警告</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <!-- 这里放置你的警告消息内容 -->
+              <p>这是一个警告消息。</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+          </div>
+      </div>
+  </div>
+</div>
 
 <script>
   $(document).ready(function () {
@@ -43,8 +54,11 @@
       ];
       console.table(artists);
     }
+    question1();
 
-    var checkName = function () {
+    $("#check-btn").click(checkName);
+
+    function checkName () {
       const userAnswer = document.getElementById("textInput").value;
       const correctAnswer = "Chaim,Soutine"; // 設定正確答案，這裡替換為你想要的答案
 
@@ -59,12 +73,21 @@
 
       output.style.display = "block";
     };
+    $("#alertModal").modal("show");
 
-    // function checkName() {
-
-    // }
-
-    question1();
+    function getAjaxResponse(){
+      $.ajax({
+        url: "{% url 'AjaxJsonResponse' %}",
+        type: "POST",
+        success: function(response){
+          console.log(response);
+        },
+        error: function(error){
+          console.log(error);
+        }
+      });
+    }
+    getAjaxResponse();
   });
 </script>
 

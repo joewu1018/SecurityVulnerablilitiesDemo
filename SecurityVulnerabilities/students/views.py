@@ -1,7 +1,10 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from .forms import SearchForm, StudentsForm
 from accounts.models import Student
 from .models import Grade
+from .data import Data
 
 # 學生成績查詢
 def grade_search(request):
@@ -54,7 +57,7 @@ def grade_search(request):
             'name': student.username,
             'studentId': student.studentId,
         })
-    return render(request, "accounts/grade_search.html", locals())
+    return render(request, "students/grade_search.html", locals())
 
 # 學生資料維護
 def student_maintenance(request):
@@ -66,18 +69,24 @@ def student_maintenance(request):
             form.save()
     else:
         form = StudentsForm(instance=student)
-    return render(request, "accounts/student_maintenance.html", locals())
+    return render(request, "students/student_maintenance.html", locals())
 
 # XSS
 def xss_vulnerable(request):
     if request.method == 'POST':
         message = request.POST.get('message')
-    return render(request, 'accounts/xss.html', locals())
+    return render(request, 'students/xss.html', locals())
 
 # SQL Injection
 def sql_injection_vulnerable(request):
-    return render(request, 'accounts/sql_injection.html', locals())
+    return render(request, 'students/sql_injection.html', locals())
 
 # Quiz
 def quiz(request):
-    return render(request, 'accounts/quiz.html', locals())
+    return render(request, 'students/quiz.html', locals())
+
+# Ajax
+@csrf_exempt
+def ajaxJsonResponse(request):
+    data = Data.weather_data
+    return JsonResponse({'data': data})

@@ -39,5 +39,7 @@ urlpatterns = [
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
     # Quiz
-    path('quiz/', students.quiz,name='Quiz')
+    path('quiz/', students.quiz, name='Quiz'),
+    # AjaxJsonResponse
+    path('ajaxJsonResponse/', students.ajaxJsonResponse, name='AjaxJsonResponse')
 ]
