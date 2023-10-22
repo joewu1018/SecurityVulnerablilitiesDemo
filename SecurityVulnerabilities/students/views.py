@@ -105,11 +105,15 @@ def devtools_network(request):
 def check_answer(request):
     if request.method == 'POST':
         question = request.POST.get('question')
-        answer = request.POST.get('answer')
+        input = request.POST.get('input')
         if question == 'AjaxJsonResponse':
-            if answer == '10':
-                return JsonResponse({'correct': True})
-    return JsonResponse({'correct': False})
+            if input == '10':
+                return JsonResponse({'isCorrect': True})
+        elif question == 'ElementsComputed':
+            answer = request.POST.get('answer')
+            if input == answer:
+                return JsonResponse({'isCorrect': True})
+    return JsonResponse({'isCorrect': False})
 
 # Ajax
 @csrf_exempt

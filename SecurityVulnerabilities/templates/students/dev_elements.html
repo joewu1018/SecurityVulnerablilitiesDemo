@@ -1,9 +1,94 @@
 {% extends "base.html" %}
 {% block title %}Dev Elements{% endblock %}
 {% block content%}
+<div class="row">
+  <div class="col-9">
+    <h1>Elements</h1>
+  </div>
+  <div class="col-3"
+    style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+    <h2 style="margin: 15px;">Mission</h2> <span class="badge bg-danger" style="margin: 15px;">
+      <h4>Incomplete 1/2</h4>
+    </span>
+  </div>
+</div>
+<ul>
+  <li>
+    <h5>查看元素大小、間距</h4>
+      <hr>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">任務1</h5>
+          <p class="card-text">請使用Chrome DevTools的Elements功能，查出這個矩形的實際寬度</p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ElementsComputed">
+            點我挑戰
+          </button>
+        </div>
+      </div>
+  </li>
+</ul>
+
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+<!-- ElementsComputed -->
+<div class="modal fade" id="ElementsComputed" tabindex="-1" aria-labelledby="ElementsComputedLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ElementsComputedLabel"><strong>任務1</strong><br>查看元素大小、間距</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <p>請使用Chrome DevTools的Elements功能，查出這個矩形的實際寬度
+            <br>
+            <br>
+            目標:請輸入矩形的實際寬度(不包括padding、border、margin)
+          </p>
+          <div id="computed-div"
+            style="width: 200px; height: 100px; border: 1px solid #000; padding: 20px; margin: 10px; background-color: rgb(196, 196, 196);">
+          </div>
+          <div style="margin-top: 5%;">
+            <label>答案：</label>&emsp;
+            <input type="text" name="answer" class="form-control" style="width: 60%;display: inline;"
+              placeholder="請輸入純數字，單位為px ex.123.45">
+            <input type="hidden" name="question" value="ElementsComputed">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+          <button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <script>
   $(document).ready(function () {
-      
+    // 提交按鈕事件
+    $("#submit-btn").click(function () {
+      event.preventDefault();
+      checkAnswer();
+    });
+
+    // 檢查答案
+    function checkAnswer() {
+      var data = {
+        input: $("input[name='answer']").val(),
+        answer: $("#computed-div").width(),
+        question: $("input[name='question']").val(),
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      };
+      AjaxCheckAnswer(data, function (response) {
+        $("#ElementsComputed").modal("hide");
+        if (response.isCorrect) {
+          alertMissionComplete();
+        } else {
+          alertMissionFail();
+        }
+      });
+    }
   });
 </script>
 {% endblock %}

@@ -1,52 +1,76 @@
 {% extends "base.html" %}
 {% block title %}Dev Network{% endblock %}
 {% block content%}
+<div class="row">
+    <div class="col-9">
+        <h1>Network</h1>
+    </div>
+    <div class="col-3"
+        style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        <h2 style="margin: 15px;">Mission</h2> <span class="badge bg-danger" style="margin: 15px;">
+            <h4>Incomplete 1/2</h4>
+        </span>
+    </div>
+</div>
+<ul>
+    <li>
+        <h5>檢視API、AJAX網頁請求回應的詳細資訊</h4>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">任務1</h5>
+                    <p class="card-text">請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#AjaxJsonResponse">
+                        點我挑戰
+                    </button>
+                </div>
+            </div>
+    </li>
+</ul>
 
-<h1>Network</h1>
-<h4>顯示API、AJAX網頁請求和回應的詳細資訊</h4>
-<br>
-<h2>Mission <span class="badge bg-danger">Incomplete 1/2</span></h2>
-<h4>任務1</h4>
-<p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    點我挑戰
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+<!-- AjaxJsonResponse -->
+<div class="modal fade" id="AjaxJsonResponse" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="AjaxJsonResponseLabel"><strong>任務1</strong><br>檢視API、AJAX網頁請求回應的詳細資訊</h4>
             </div>
             <form method="post">
                 {% csrf_token %}
                 <div class="modal-body">
-                    <div>
-                        <p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊
-                            hint: 有些字被編碼了可以<a href="https://toolbox.googleapps.com/apps/encode_decode/"
-                                target="_blank">前往解碼</a>，選擇UTF16解碼
-                            <br>
-                            <br>
-                            目標:請輸入大安區2023/10/22 12:00-18:00的降雨機率
-                        </p>
-
+                    <div style="margin: 0px 5px;">
+                        <p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
+                        <p>hint: 有些字被編碼了可以<a href="https://toolbox.googleapps.com/apps/encode_decode/"
+                                target="_blank">前往解碼</a>，選擇UTF16解碼</p>
+                        <br>
+                        <br>
+                        <strong>目標:請輸入大安區2023/10/22 12:00-18:00的降雨機率</strong>
+                        <br>
+                        <br>
                         <button class="btn btn-primary" id="getAjaxResponse-btn">發送請求</button>
                     </div>
                     <div style="margin-top: 5%;">
-                        <input type="text" name="answer" class="form-control">
+                        <label>答案：</label>&emsp;
+                        <input type="text" name="answer" class="form-control"
+                            style="width: 60%;display: inline;" placeholder="請輸入純數字，單位為% ex.20">
                         <input type="hidden" name="question" value="AjaxJsonResponse">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
-                    <button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+                    <button type="button" class="btn btn-success" id="submit-btn">提交</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
 <script>
     $(document).ready(function () {
         // 發送請求按鈕事件
@@ -77,21 +101,18 @@
 
         // 檢查答案
         function checkAnswer() {
-            $.ajax({
-                url: "{% url 'CheckAnswer' %}",
-                type: "POST",
-                data: {
-                    answer: $("input[name='answer']").val(),
-                    question: $("input[name='question']").val(),
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                },
-                success: function (response) {
-                    if (response.correct) {
-                        alert("答案正確");
-                    } else {
-                        alert("答案錯誤");
-                    }
-                },
+            var data = {
+                input: $("input[name='answer']").val(),
+                question: $("input[name='question']").val(),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            };
+            AjaxCheckAnswer(data, function (response) {
+                $("#AjaxJsonResponse").modal("hide");
+                if (response.isCorrect) {
+                    alertMissionComplete();
+                } else {
+                    alertMissionFail();
+                }
             });
         }
     });

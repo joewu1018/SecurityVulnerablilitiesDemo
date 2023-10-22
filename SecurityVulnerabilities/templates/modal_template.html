@@ -1,0 +1,59 @@
+<!-- 答對視窗 -->
+<div class="modal fade" id="correct-info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="correctModalLabel">✅ 恭喜</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>任務完成</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 答錯視窗 -->
+<div class="modal fade" id="wrong-info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="wrongModalLabel">❌ 失敗</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>任務失敗</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // 任務完成Modal彈窗
+    function alertMissionComplete() {
+        const correctModal = new bootstrap.Modal($('#correct-info'));
+        $("#correct-info").modal("show");
+    }
+
+    // 任務失敗Modal彈窗
+    function alertMissionFail() {
+        const wrongModal = new bootstrap.Modal($('#wrong-info'));
+        $("#wrong-info").modal("show");
+    }
+
+    // 核對答案
+    function AjaxCheckAnswer(data, successCallback) {
+        $.ajax({
+            url: "{% url 'CheckAnswer' %}",
+            type: "POST",
+            data: data,
+            success: successCallback,
+        });
+    }
+</script>
