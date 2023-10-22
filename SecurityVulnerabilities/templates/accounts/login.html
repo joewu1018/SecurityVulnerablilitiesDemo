@@ -46,16 +46,39 @@
 		</div>
 	</form>
 </div>
+<!-- modal -->
+<div class="modal fade" id="Modal-info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">⚠️ 警告</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>😈😈 哈哈，不讓你下載！</p>
+				<p>💡💡 hint: 它被別的事件蓋住了！</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
-	$(document).ready(function() {
-		$("#download-btn").mouseover(function() {
-			alert("😈😈哈哈，不讓你下載！\n\n💡💡hint: 它被別的事件蓋住了！");
+	$(document).ready(function () {
+		const myModal = new bootstrap.Modal($('#Modal-info'));
+
+		$("#download-btn").mouseover(function () {
+			myModal.show();
 		});
-		$("#download-btn").click(function() {
+
+		$("#download-btn").click(function () {
 			$("#login-password").text("ntuemie1031");
 		});
 	});
+
 
 </script>
 {% endblock %}
