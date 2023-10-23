@@ -21,6 +21,7 @@ class Grade(models.Model):
 class Board(models.Model):
     author = models.ForeignKey(Student, on_delete=models.CASCADE)
     content = models.TextField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.student.username + '-' + self.content
+        return self.author.username + '-' + self.content

@@ -1,0 +1,37 @@
+{% extends "Base.html" %}
+{% block title %}留言板{% endblock %}
+{% block content %}
+{% load filter %}
+
+
+<form method="POST" style="padding: 0;margin:0 ;display: flex;" class="col-md-11">
+    <div class="col-md-10">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" name="content" placeholder="發表留言..." style="width: 95%;"></input>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary" style="width: 70%;">留言</button>
+    </div>
+</form>
+{% for board in boards%}
+<div class="card">
+    <div class="card-header">
+        {{ board.author.username }}
+        {% if board.created_at|timeSince < 60 %}
+            <span>{{ board.created_at|timeSince }} 分鐘前</span><br>
+        {% elif board.created_at|timeSince < 1440 %}
+        <span>{% widthratio board.created_at|timeSince 60 1 %} 小時前</span><br>
+        {% else %}
+            <span>{% widthratio board.created_at|timeSince 1440 1 %} 天前</span><br>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ board.content }}</p>
+    </div>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

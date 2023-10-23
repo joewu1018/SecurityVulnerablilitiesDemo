@@ -39,6 +39,8 @@ urlpatterns = [
     path('grade_search/', students.grade_search, name='GradeSearch'),
     # 學生資料維護
     path('student_maintenance/', students.student_maintenance, name='StudentMaintenance'),
+    # 留言板
+    path('board/', students.board, name='Board'),
     # XSS
     path('xss/', students.xss_vulnerable, name='XSS'),
     # SQL Injection

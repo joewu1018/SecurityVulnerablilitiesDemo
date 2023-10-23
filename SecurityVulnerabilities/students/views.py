@@ -1,9 +1,10 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from .forms import SearchForm, StudentsForm
 from accounts.models import Student
-from .models import Grade
+from .models import Grade, Board
 from .data import Data
 
 # 學生成績查詢
@@ -71,6 +72,18 @@ def student_maintenance(request):
         form = StudentsForm(instance=student)
     return render(request, "students/student_maintenance.html", locals())
 
+#留言板
+def board(request):
+    if request.method == 'POST':
+        author = Student.objects.get(id=request.user.id)
+        content = request.POST.get('content')
+        board = Board.objects.create(author=author, content=content)
+        board.save()
+        return redirect(reverse('Board'))
+    else:
+        boards = Board.objects.all()
+    return render(request, 'students/board.html', locals())
+
 # XSS
 def xss_vulnerable(request):
     if request.method == 'POST':
@@ -81,7 +94,7 @@ def xss_vulnerable(request):
 def sql_injection_vulnerable(request):
     return render(request, 'students/sql_injection.html', locals())
 
-# Quiz
+# Devtools頁面
 def devtools(request):
     return render(request, 'students/devtools.html', locals())
 

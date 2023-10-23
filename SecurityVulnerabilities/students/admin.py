@@ -6,7 +6,7 @@ class GradeAdmin(admin.ModelAdmin):
 	list_filter = ("semester", "subject")
 	
 class  BoardAdmin(admin.ModelAdmin):
-    list_display = ("id", "author", "content")
+    list_display = ("id", "author", "content", "created_at")
 
 admin.site.register(Grade, GradeAdmin)
 admin.site.register(Board, BoardAdmin)
