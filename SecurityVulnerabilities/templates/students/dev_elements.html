@@ -82,10 +82,11 @@
       };
       AjaxCheckAnswer(data, function (response) {
         $("#ElementsComputed").modal("hide");
+        var mission = $("#ElementsComputedLabel").text();
         if (response.isCorrect) {
-          alertMissionComplete();
+          alertMissionComplete(mission);
         } else {
-          alertMissionFail();
+          alertMissionFail(mission);
         }
       });
     }

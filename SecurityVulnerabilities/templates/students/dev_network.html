@@ -15,17 +15,17 @@
 <ul>
     <li>
         <h5>檢視API、AJAX網頁請求回應的詳細資訊</h4>
-            <hr>
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">任務1</h5>
-                    <p class="card-text">請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#AjaxJsonResponse">
-                        點我挑戰
-                    </button>
-                </div>
+        <hr>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">任務1</h5>
+                <p class="card-text">請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#AjaxJsonResponse">
+                    點我挑戰
+                </button>
             </div>
+        </div>
     </li>
 </ul>
 
@@ -108,10 +108,11 @@
             };
             AjaxCheckAnswer(data, function (response) {
                 $("#AjaxJsonResponse").modal("hide");
+                var mission = $("#AjaxJsonResponseLabel").text();
                 if (response.isCorrect) {
-                    alertMissionComplete();
+                    alertMissionComplete(mission);
                 } else {
-                    alertMissionFail();
+                    alertMissionFail(mission);
                 }
             });
         }

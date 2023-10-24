@@ -28,7 +28,7 @@
         {% endif %}
     </div>
     <div class="card-body">
-        <p class="card-text">{{ board.content }}</p>
+        <p class="card-text">{{ board.content|safe }}</p>
     </div>
 </div>
 <br>

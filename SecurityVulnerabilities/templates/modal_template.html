@@ -8,7 +8,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>任務完成</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -26,7 +25,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>任務失敗</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -36,14 +34,16 @@
 </div>
 <script>
     // 任務完成Modal彈窗
-    function alertMissionComplete() {
+    function alertMissionComplete(mission) {
         const correctModal = new bootstrap.Modal($('#correct-info'));
+        $("#correct-info .modal-body").html("<p>【" + mission + "】任務完成</p>");
         $("#correct-info").modal("show");
     }
 
     // 任務失敗Modal彈窗
-    function alertMissionFail() {
+    function alertMissionFail(mission) {
         const wrongModal = new bootstrap.Modal($('#wrong-info'));
+        $("#wrong-info .modal-body").html("<p>【" + mission + "】任務失敗</p>");
         $("#wrong-info").modal("show");
     }
 

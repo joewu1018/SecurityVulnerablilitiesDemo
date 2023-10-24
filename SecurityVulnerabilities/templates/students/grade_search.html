@@ -57,12 +57,14 @@
     </tbody>
 </table>
 
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
 
 <script>
   $(document).ready(function() {
     var hacked = "{{ hacked }}" == "True" ? true : false;
     if(hacked){
-      alert("Hacked Success!");
+      alertMissionComplete("aaa");
     }
   });
 </script>

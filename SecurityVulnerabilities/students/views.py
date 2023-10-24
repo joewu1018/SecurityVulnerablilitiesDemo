@@ -119,11 +119,14 @@ def check_answer(request):
     if request.method == 'POST':
         question = request.POST.get('question')
         input = request.POST.get('input')
+        answer = request.POST.get('answer')
         if question == 'AjaxJsonResponse':
             if input == '10':
                 return JsonResponse({'isCorrect': True})
         elif question == 'ElementsComputed':
-            answer = request.POST.get('answer')
+            if input == answer:
+                return JsonResponse({'isCorrect': True})
+        elif question == 'GetReturnValue':
             if input == answer:
                 return JsonResponse({'isCorrect': True})
     return JsonResponse({'isCorrect': False})
