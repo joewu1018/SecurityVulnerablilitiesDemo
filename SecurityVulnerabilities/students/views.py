@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import SearchForm, StudentsForm
 from accounts.models import Student
-from .models import Grade, Board
+from .models import Grade, Board, MissionCategory, Mission, MissionRecord
 from .data import Data
+from django.db.models import Max
+from .service import StudentService
 
 # 學生成績查詢
 def grade_search(request):
@@ -120,15 +122,19 @@ def check_answer(request):
         question = request.POST.get('question')
         input = request.POST.get('input')
         answer = request.POST.get('answer')
+        mission_id = int(request.POST.get('mission_id'))
         if question == 'AjaxJsonResponse':
-            if input == '10':
+            if input == '10':                
+                StudentService.create_mission_record(request.user.id, mission_id, True)
                 return JsonResponse({'isCorrect': True})
-        elif question == 'ElementsComputed':
-            if input == answer:
-                return JsonResponse({'isCorrect': True})
-        elif question == 'GetReturnValue':
-            if input == answer:
-                return JsonResponse({'isCorrect': True})
+            else:
+                StudentService.create_mission_record(request.user.id, mission_id, False)
+        elif input == answer:
+            StudentService.create_mission_record(request.user.id, mission_id, True)
+            return JsonResponse({'isCorrect': True})
+        else:
+            StudentService.create_mission_record(request.user.id, mission_id, False)
+
     return JsonResponse({'isCorrect': False})
 
 # Ajax

@@ -25,3 +25,26 @@ class Board(models.Model):
     
     def __str__(self):
         return self.author.username + '-' + self.content
+    
+class MissionCategory(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.title
+    
+class Mission(models.Model):
+    title = models.CharField(max_length=100)
+    category = models.ForeignKey(MissionCategory, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.title
+
+class MissionRecord(models.Model):    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
+    is_completed = models.BooleanField(default=False)
+    attempts = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.student.username + '-' + self.mission.title + '-' + str(self.is_completed)
