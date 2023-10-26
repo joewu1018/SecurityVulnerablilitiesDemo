@@ -8,7 +8,7 @@ register = template.Library()
 def timeSince(datetime):
     now = timezone.now()
     timedelta = now - datetime
-    minutes = int(timedelta.seconds / 60)
+    minutes = int(timedelta.days*24*60 + timedelta.seconds / 60)
     return minutes
 
 @register.filter
