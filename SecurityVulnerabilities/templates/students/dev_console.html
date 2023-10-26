@@ -51,7 +51,7 @@
                     <div style="margin-top: 5%;">
                         <label>答案：</label>&emsp;
                         <input type="text" name="answer" class="form-control" style="width: 60%;display: inline;"
-                            placeholder="請輸入印出的字串">
+                            placeholder="請輸入回傳的字串，不用加''">
                         <input type="hidden" name="question" value="GetReturnValue">
                         <input type="hidden" name="mission_id" value="2">
                     </div>
@@ -84,6 +84,7 @@
                 input: $("input[name='answer']").val(),
                 answer: getAnswer(),
                 question: $("input[name='question']").val(),
+                mission_id: $("input[name='mission_id']").val(),
                 csrfmiddlewaretoken: "{{ csrf_token }}",
             };
             AjaxCheckAnswer(data, function (response) {

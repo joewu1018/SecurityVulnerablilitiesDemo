@@ -79,6 +79,7 @@
         input: $("input[name='answer']").val(),
         answer: $("#computed-div").width(),
         question: $("input[name='question']").val(),
+        mission_id: $("input[name='mission_id']").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       };
       AjaxCheckAnswer(data, function (response) {

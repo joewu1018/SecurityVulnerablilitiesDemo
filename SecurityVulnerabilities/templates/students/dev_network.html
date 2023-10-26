@@ -104,7 +104,9 @@
         function checkAnswer() {
             var data = {
                 input: $("input[name='answer']").val(),
+                answer: 10,
                 question: $("input[name='question']").val(),
+                mission_id: $("input[name='mission_id']").val(),
                 csrfmiddlewaretoken: "{{ csrf_token }}",
             };
             AjaxCheckAnswer(data, function (response) {
