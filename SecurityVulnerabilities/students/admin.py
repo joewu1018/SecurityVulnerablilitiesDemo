@@ -12,7 +12,8 @@ class MissionCategoryAdmin(admin.ModelAdmin):
 	list_display = ("id", "title")
 
 class MissionAdmin(admin.ModelAdmin):
-	list_display = ("id", "title", "category")
+	list_display = ("id", "title", "alias", "category")
+	list_filter = ("category",)
 
 class MissionRecordAdmin(admin.ModelAdmin):
 	list_display = ("id", "student", "mission", "is_completed", "attempts", "created_at")

@@ -1,32 +1,53 @@
 {% extends "base.html" %}
 {% block title %}Dev Elements{% endblock %}
 {% block content%}
+{% load filter %}
 <div class="row">
   <div class="col-9">
     <h1>Elements</h1>
   </div>
-  <div class="col-3"
-    style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-    <h2 style="margin: 15px;">Mission</h2> <span class="badge bg-danger" style="margin: 15px;">
-      <h4>Incomplete 1/2</h4>
-    </span>
+  <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+    {% if missions_complete_count == missions_info|length %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-success" style="margin: 15px;">
+        <h4>complete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
+      </span>
+    {% else %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-danger" style="margin: 15px;">
+        <h4>InComplete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
+      </span>
+    {% endif %}
   </div>
 </div>
+{% for mission_info in missions_info %}
 <ul>
   <li>
-    <h5>查看元素大小、間距</h4>
+    <h5>{{ mission_info.mission.title }}</h4>
       <hr>
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">任務1</h5>
-          <p class="card-text">請使用Chrome DevTools的Elements功能，查出這個矩形的實際寬度</p>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ElementsComputed">
+          <h5 class="card-title" style="display: inline;">任務{{ forloop.counter }}</h5>
+          {% if mission_info.is_completed %}
+            <span class="badge bg-success" style="margin: 15px;">
+              <h6>Complete</h6>
+            </span>
+          {% else %}
+            <span class="badge bg-danger" style="margin: 15px;">
+              <h6>Incomplete</h6>
+            </span>
+          {% endif %}
+          <span>嘗試次數:{{ mission_info.attempts }}</span>
+          <p class="card-text">{{ mission_info.mission.description }}</p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#{{ mission_info.mission.alias }}">
             點我挑戰
           </button>
         </div>
       </div>
   </li>
 </ul>
+{% endfor %}
 
 <!-- modal視窗 -->
 {% include 'modal_template.html' %}
@@ -53,7 +74,7 @@
             <label>答案：</label>&emsp;
             <input type="text" name="answer" class="form-control" style="width: 60%;display: inline;"
               placeholder="請輸入純數字，單位為px ex.123.45">
-            <input type="hidden" name="question" value="ElementsComputed">            
+            <input type="hidden" name="question" value="ElementsComputed">
             <input type="hidden" name="mission_id" value="1">
           </div>
         </div>

@@ -10,3 +10,13 @@ def timeSince(datetime):
     timedelta = now - datetime
     minutes = int(timedelta.seconds / 60)
     return minutes
+
+@register.filter
+def formatTime(datetime):
+    if datetime == '':
+        return '-'
+    return datetime.strftime("%Y/%m/%d")
+
+@register.filter
+def length(list):
+    return len(list)

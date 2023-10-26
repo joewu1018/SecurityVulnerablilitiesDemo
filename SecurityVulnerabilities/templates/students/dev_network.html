@@ -1,34 +1,54 @@
 {% extends "base.html" %}
 {% block title %}Dev Network{% endblock %}
 {% block content%}
+{% load filter %}
 <div class="row">
     <div class="col-9">
         <h1>Network</h1>
     </div>
-    <div class="col-3"
-        style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-        <h2 style="margin: 15px;">Mission</h2> <span class="badge bg-danger" style="margin: 15px;">
-            <h4>Incomplete 1/2</h4>
-        </span>
+    <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+        {% if missions_complete_count ==  missions_info|length %}
+            <h2 style="margin: 15px;">Mission</h2> 
+            <span class="badge bg-success" style="margin: 15px;">
+                <h4>complete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
+            </span>
+        {% else %}
+            <h2 style="margin: 15px;">Mission</h2> 
+            <span class="badge bg-danger" style="margin: 15px;">
+                <h4>InComplete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
+            </span>
+        {% endif %}
     </div>
 </div>
+{% for mission_info in missions_info %}
 <ul>
     <li>
-        <h5>檢視API、AJAX網頁請求回應的詳細資訊</h4>
+        <h5>{{ mission_info.mission.title }}</h4>
         <hr>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">任務1</h5>
-                <p class="card-text">請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
+                <h5 class="card-title" style="display: inline;">任務{{ forloop.counter }}</h5>
+                {% if mission_info.is_completed %}
+                    <span class="badge bg-success" style="margin: 15px;">
+                        <h6>Complete</h6>
+                    </span>
+                {% else %}
+                    <span class="badge bg-danger" style="margin: 15px;">
+                        <h6>Incomplete</h6>
+                    </span>
+                {% endif %}
+                <span>嘗試次數:{{ mission_info.attempts }}</span>
+                <span>最後提交:{{ mission_info.last_attempt|formatTime }}</span>
+                <p class="card-text">{{ mission_info.mission.description }}</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#AjaxJsonResponse">
+                    data-bs-target="#{{ mission_info.mission.alias }}">
                     點我挑戰
                 </button>
             </div>
         </div>
     </li>
 </ul>
-
+{% endfor %}
 
 <!-- modal視窗 -->
 {% include 'modal_template.html' %}
@@ -45,8 +65,7 @@
                 <div class="modal-body">
                     <div style="margin: 0px 5px;">
                         <p>請使用Chrome DevTools的Network功能，查出回傳的天氣資訊</p>
-                        <p>hint: 有些字被編碼了可以<a href="https://toolbox.googleapps.com/apps/encode_decode/"
-                                target="_blank">前往解碼</a>，選擇UTF16解碼</p>
+                        <p>hint: 有些字被編碼了可以<a href="https://toolbox.googleapps.com/apps/encode_decode/" target="_blank">前往解碼</a>，選擇UTF16解碼</p>
                         <br>
                         <br>
                         <strong>目標:請輸入大安區2023/10/22 12:00-18:00的降雨機率</strong>

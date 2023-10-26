@@ -34,6 +34,8 @@ class MissionCategory(models.Model):
     
 class Mission(models.Model):
     title = models.CharField(max_length=100)
+    description = models.TextField(default="")
+    alias = models.CharField(max_length=100, default="")
     category = models.ForeignKey(MissionCategory, on_delete=models.CASCADE)
     
     def __str__(self):

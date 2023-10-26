@@ -102,18 +102,26 @@ def devtools(request):
 
 # Devtools Element頁籤
 def devtools_elements(request):
+    category_id = MissionCategory.objects.get(title='Elements').id    
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/dev_elements.html', locals())
 
 # Devtools Console頁籤
 def devtools_console(request):
+    category_id = MissionCategory.objects.get(title='Console').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/dev_console.html', locals())
 
 # Devtools Source頁籤
 def devtools_source(request):
+    category_id = MissionCategory.objects.get(title='Source').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/dev_source.html', locals())
 
 # Devtools Network頁籤
 def devtools_network(request):
+    category_id = MissionCategory.objects.get(title='Network').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/dev_network.html', locals())
 
 # 檢查答案
