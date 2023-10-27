@@ -45,6 +45,8 @@ urlpatterns = [
     path('xss/', students.xss_vulnerable, name='XSS'),
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
+    # Broken Authentication
+    path('broke_authentication/', students.broke_authentication_vulnerable, name='BrokeAuthentication'),
     # Quiz
     path('devtools/', students.devtools, name='Devtools'),
     # Devtools Elements頁籤
