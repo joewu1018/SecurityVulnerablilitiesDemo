@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}身分驗證漏洞{% endblock %} 
+{% block content%}
+<h1>什麼是身份驗證漏洞</h1>
+<h4>不安全的身分驗證</h4>
+<p>由於身分和使用權控制的設計和實施不佳，易被破壞的身分驗證很廣泛，讓我們舉一個例子來說明這一點：用戶在登入畫面提示時輸入了錯誤的用戶名，但成功進入了網站，這是識別失敗的典型例子。該應用程式使用用戶名或用戶 ID 來識別註冊用戶。 <br>
+相應地，使用者在提示下輸入了錯誤的密碼但能夠登入網站就是認證失敗的一個例子。在這種情況下，應用程式未能準確驗證使用者的身份，從而允許錯誤的身份登入。 </p>
+<img src="https://www.mdpi.com/electronics/electronics-11-00004/article_deploy/html/images/electronics-11-00004-g001.png" alt="" width="80%">
+
+<h4>身分驗證漏洞的手法</h4>
+<ol>
+  <li>暴力破解</li>
+  <p>暴力破解是一種攻擊方式，攻擊者使用自動化工具，反覆嘗試不同的使用者名稱和密碼組合，直到找到正確的組合為止。相對地，資格證填充則涉及使用自動化工具，測試已知的使用者名稱和密碼組合，例如從資料外洩中獲取的組合，橫跨多個網站和服務，這些組合很可能是從暗網獲得的。</p>
+  <li>Session hijacking</li>
+  <p>如果攻擊者能夠竊取會話詳細信息，那麼他們甚至在使用者離開會話之後也可以冒充該使用者。駭客獲得對互聯網會話的訪問權後，尤其在銀行交易等情境中，對使用者造成了嚴重的危險。</p>
+  <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-01-session-id-sniffing.png" alt="">
+  <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-02-session-id-spoofing.png" alt="">
+  <li>Session fixation</li>
+  <p></p>
+  <li>社群媒體帳號存取</li>
+  <p></p>
+  <li>網頁重新導向Execution after redirect (EAR)</li>
+  <p></p>
+</ol>
+
+
+<p>reference : <a href="https://feifei.tw/authentication/">[網站漏洞] 002 Broken Authentication vulnerabilities 身份驗證漏洞</a><a href="https://www.softwaresecured.com/intro-to-identification-and-authentication-failures/">Intro to Identification and Authentication Failures</a></p>
+{% endblock %}

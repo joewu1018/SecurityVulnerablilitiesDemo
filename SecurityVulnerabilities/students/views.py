@@ -96,6 +96,10 @@ def xss_vulnerable(request):
 def sql_injection_vulnerable(request):
     return render(request, 'students/sql_injection.html', locals())
 
+# Broke Authentication
+def broke_authentication_vulnerable(request):
+    return render(request, 'students/broke_authentication.html', locals())
+
 # Devtools頁面
 def devtools(request):
     return render(request, 'students/devtools.html', locals())
