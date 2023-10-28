@@ -6,8 +6,7 @@
     <div class="col-9">
         <h1>什麼是 SQL Injection？</h1>
     </div>
-    <div class="col-3"
-        style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
+    <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
         {% if missions_complete_count == missions_info|length %}
         <h2 style="margin: 15px;">Mission</h2>
         <span class="badge bg-success" style="margin: 0px 0px 15px;font-size: 22px;">
@@ -24,52 +23,38 @@
 <hr>
 <div class="card" style="margin: 20px 0px;">
     <div class="card-body">
-        <p>SQL Injection 的原理很簡單，利用網頁程式設計者忽略檢查使用者輸入內容造成攻擊，攻擊者嘗試在您的資料庫上執行其他命令。之所以稱為 SQL 注入，是因為攻擊者透過使用者輸入SQL
-            命令，從而改變應用程式的檢查方式。這不僅會導致資訊外洩、未經授權的訪問，甚至刪除您的所有資料。
+        <p>SQL Injection 的原理很簡單，利用網頁程式設計者忽略檢查使用者輸入內容造成攻擊，攻擊者嘗試在您的資料庫上執行其他命令。之所以稱為 SQL 注入，是因為攻擊者透過使用者輸入SQL 命令，從而改變應用程式的檢查方式。這不僅會導致資訊外洩、未經授權的訪問，甚至刪除您的所有資料。
             <br>
-            現在讓我們來看一個例子。假設您有一個 API 來驗證使用者身份，並且在您的程式碼中執行以下查詢：
-        </p>
-        <code>
+            現在讓我們來看一個例子。假設您有一個 API 來驗證使用者身份，並且在您的程式碼中執行以下查詢： </p>
+            <code>
                 select * from users where username='myuser' and password ='secret';
             </code>
-        <br>
-        <p>假設使用者輸入以下字串：'secret' or '1'='1'。然後我們有這個： </p>
-        <code>
+            <br>
+            <p>假設使用者輸入以下字串：'secret' or '1'='1'。然後我們有這個： </p>
+            <code>
                 select * from users where username='myuser' and password ='secret' or '1'='1';
             </code>
-            <br>
-        <img src="https://tech-blog.cymetrics.io/img/posts/nick/sqli/sqli_3-1280w.webp" alt="" width="50%"
-            style="margin: 10px 0px;">
-            <br>
-        <p>網站登入流程
-        <ol>
+            <img src="https://tech-blog.cymetrics.io/img/posts/nick/sqli/sqli_3-1280w.webp" alt="" width="50%" style="margin: 10px 0px;">
+            <p>網站登入流程
+            <ol>
             <li>用戶在頁面上輸入帳號密碼。</li>
             <li>前端將從頁面上將資料整理給後端。</li>
             <li>後段將資料整理成 SQL 格式，向資料庫詢問是否存在一個名稱欄位為 admin 密碼欄位為 password 的使用者，如果存在的話 ID 是多少。</li>
             <li>後端從資料庫找到這個使用者後判斷讓用戶登入。</li>
             <li>前端在頁面上顯示登入成功。</li>
-        </ol>
-        SQL Injection 攻擊的流程，示範如何不用密碼就可登錄網站<br>
-        <img src="https://tech-blog.cymetrics.io/img/posts/nick/sqli/sqli_4-1280w.webp" alt="" width="50%"
-            style="margin: 10px 0px;">
-            <br>
-        網站登入流程(SQL Injection)
-        <ol>
-            <li>用戶輸入帳號密碼。</li>
-            <li>前端將資料整理給後端。</li>
-            <li>後段將資料整理成SQL語法格式，向資料庫詢問是否存在一個名稱欄位為 admin 或 1=1 和密碼為空的使用者，如果存在的話 ID 是多少。</li>
-            <li>後端從資料庫找不到這個使用者但因為 1 等於 1 所以讓讓用戶登入。</li>
-            <li>前端在頁面上顯示登入成功。</li>
-        </ol>
-        </p>
-        <p>reference : <a href="https://tech-blog.cymetrics.io/posts/nick/sqli/">秒懂 SQL Injection</a>、<a
-                href="https://www.stackhawk.com/blog/sql-injection-prevention-django/">Django SQL Injection Guide:
-                Examples and Prevention</a></p>
-    </div>
-</div>
-<div class="card" style="margin: 20px 0px;">
-    <div class="card-body">
-        <h3 class="card-title">Mission</h3>
+            </ol>
+            SQL Injection 攻擊的流程，示範如何不用密碼就可登錄網站<br>
+            <img src="https://tech-blog.cymetrics.io/img/posts/nick/sqli/sqli_4-1280w.webp" alt="" width="50%" style="margin: 10px 0px;">
+            網站登入流程(SQL Injection)
+            <ol>
+                <li>用戶輸入帳號密碼。</li>
+                <li>前端將資料整理給後端。</li>
+                <li>後段將資料整理成SQL語法格式，向資料庫詢問是否存在一個名稱欄位為 admin 或 1=1 和密碼為空的使用者，如果存在的話 ID 是多少。</li>
+                <li>後端從資料庫找不到這個使用者但因為 1 等於 1 所以讓讓用戶登入。</li>
+                <li>前端在頁面上顯示登入成功。</li>
+            </ol>
+            </p>
+            <p>reference : <a href="https://tech-blog.cymetrics.io/posts/nick/sqli/">秒懂 SQL Injection</a>、<a href="https://www.stackhawk.com/blog/sql-injection-prevention-django/">Django SQL Injection Guide: Examples and Prevention</a></p>
         <hr>
         {% for mission_info in missions_info %}
         <ul>
@@ -114,5 +99,4 @@
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}
