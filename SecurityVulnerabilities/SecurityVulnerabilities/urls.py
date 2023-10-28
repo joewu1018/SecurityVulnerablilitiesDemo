@@ -43,6 +43,8 @@ urlpatterns = [
     path('board/', students.board, name='Board'),
     # XSS
     path('xss/', students.xss_vulnerable, name='XSS'),
+    # CSRF
+    path('Csrf/', students.csrf, name='csrf'),
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
     # Broken Authentication
