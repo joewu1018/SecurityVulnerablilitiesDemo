@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}首頁{% endblock %}
+{% block content %}
+<h1>CSRF</h1>
+
+
+<h3>攻擊流程</h3>
+<img src="https://tech-blog.cymetrics.io/img/posts/jo/zerobased-cross-site-request-forgery/p1-1280w.webp" alt="" width="50%">
+<ol>
+    <li>User 訪問並登入 A 網站</li>
+    <li>User 獲得 Cookie 並存至 User 瀏覽器</li>
+    <li>User 在未登出 A 網站的情況下瀏覽 B 網站，接著 Hacker 以 B 網站的 Domain 以 A 網站給 User 的 Cookie 對 A 網站發送請求，如果 A 網站沒發現的話就 GG 了。</li>
+</ol>
+
+<h3>達成 CSRF 攻擊流程三要素</h3>
+<ol>
+    <li>有一個可以觸發惡意腳本的動作</li>
+    <li>只以單一條件驗證網站身份，例如：只驗證 cookie 或 token</li>
+    <li>沒有驗證或是驗證的參數可以預測（固定的 cookie ）</li>
+</ol>
+
+
+
+
+
+
+
+
+
+<p>reference : <a href="https://blog.techbridge.cc/2017/02/25/csrf-introduction/">讓我們來談談 CSRF</a>、<a href="https://www.stackhawk.com/blog/django-csrf-protection-guide/">Django CSRF Protection Guide: Examples and How to Enable</a> 、 <a href="https://tech-blog.cymetrics.io/posts/jo/zerobased-cross-site-request-forgery/">零基礎資安系列（一）-認識 CSRF（Cross Site Request Forgery）</a></p>
+{% endblock %}
