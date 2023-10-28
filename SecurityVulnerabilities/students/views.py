@@ -96,6 +96,10 @@ def xss_vulnerable(request):
 def sql_injection_vulnerable(request):
     return render(request, 'students/sql_injection.html', locals())
 
+# CSRF
+def csrf(request):
+    return render(request, 'students/csrf.html', locals())
+
 # Broken Authentication
 def broken_authentication_vulnerable(request):
     return render(request, 'students/broken_authentication.html', locals())
