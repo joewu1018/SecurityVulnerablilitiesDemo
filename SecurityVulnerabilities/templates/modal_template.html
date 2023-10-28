@@ -1,16 +1,17 @@
+{% load static %}
 <!-- 答對視窗 -->
 <div class="modal fade" id="correct-info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="correctModalLabel">✅ 恭喜</h1>
+                <h1 class="modal-title fs-5" id="correctModalLabel"><img src="{% static 'images/correct.png' %}" width="25px" height="25px">&emsp;恭喜</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -21,13 +22,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="wrongModalLabel">❌ 失敗</h1>
+                <h1 class="modal-title fs-5" id="wrongModalLabel"><img src="{% static 'images/error.png' %}" width="25px" height="25px">&emsp;失敗</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
