@@ -80,32 +80,83 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
-          <button type="button" class="btn btn-primary" id="submit-btn">提交</button>
+          <button type="button" class="btn btn-primary submit-btn">提交</button>
         </div>
       </form>
     </div>
   </div>
 </div>
+<!-- OverMaxLength -->
+<div class="modal fade" id="OverMaxLength" tabindex="-1" aria-labelledby="OverMaxLengthLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="OverMaxLengthLabel"><strong>任務2</strong><br>查看元素大小、間距</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-body">
+          <p>請使用Chrome DevTools的Elements功能，查出這個矩形的實際寬度
+            <br>
+            <br>
+            目標:請輸入矩形的實際寬度(不包括padding、border、margin)
+          </p>
+          <div style="margin-top: 5%;">
+            <label>答案：</label>&emsp;
+            <input type="text" name="answer" class="form-control" style="width: 60%;display: inline;" maxlength="10"
+              placeholder="請輸入純數字，單位為px ex.123.45">
+            <input type="hidden" name="question" value="OverMaxLength">
+            <input type="hidden" name="mission_id" value="5">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+          <button type="button" class="btn btn-primary submit-btn">提交</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
   $(document).ready(function () {
     // 提交按鈕事件
-    $("#submit-btn").click(function () {
+    $(".submit-btn").click(function () {
       event.preventDefault();
       checkAnswer();
     });
 
     // 檢查答案
+    // function checkAnswer() {
+    //   var data = {
+    //     input: $("input[name='answer']").val(),
+    //     answer: $("#computed-div").width(),
+    //     question: $("input[name='question']").val(),
+    //     mission_id: $("input[name='mission_id']").val(),
+    //     csrfmiddlewaretoken: "{{ csrf_token }}",
+    //   };
+    //   AjaxCheckAnswer(data, function (response) {
+    //     $("#ElementsComputed").modal("hide");
+    //     var mission = $("#ElementsComputedLabel").text();
+    //     if (response.isCorrect) {
+    //       alertMissionComplete(mission);
+    //     } else {
+    //       alertMissionFail(mission);
+    //     }
+    //   });
+    // }
     function checkAnswer() {
       var data = {
-        input: $("input[name='answer']").val(),
-        answer: $("#computed-div").width(),
-        question: $("input[name='question']").val(),
-        mission_id: $("input[name='mission_id']").val(),
+        input: $("#OverMaxLength input[name='answer']").val(),
+        answer: 10,
+        question: $("#OverMaxLength input[name='question']").val(),
+        mission_id: $("#OverMaxLength input[name='mission_id']").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       };
       AjaxCheckAnswer(data, function (response) {
-        $("#ElementsComputed").modal("hide");
-        var mission = $("#ElementsComputedLabel").text();
+        $("#OverMaxLength").modal("hide");
+        var mission = $("#OverMaxLengthLabel").text();
         if (response.isCorrect) {
           alertMissionComplete(mission);
         } else {
