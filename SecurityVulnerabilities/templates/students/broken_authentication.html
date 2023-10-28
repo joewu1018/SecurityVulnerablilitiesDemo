@@ -1,28 +1,90 @@
 {% extends "base.html" %}
 {% block title %}身分驗證漏洞{% endblock %} 
-{% block content%}
-<h1>什麼是身份驗證漏洞</h1>
-<h4>不安全的身分驗證</h4>
-<p>由於身分和使用權控制的設計和實施不佳，易被破壞的身分驗證很廣泛，讓我們舉一個例子來說明這一點：用戶在登入畫面提示時輸入了錯誤的用戶名，但成功進入了網站，這是識別失敗的典型例子。該應用程式使用用戶名或用戶 ID 來識別註冊用戶。 <br>
-相應地，使用者在提示下輸入了錯誤的密碼但能夠登入網站就是認證失敗的一個例子。在這種情況下，應用程式未能準確驗證使用者的身份，從而允許錯誤的身份登入。 </p>
-<img src="https://www.mdpi.com/electronics/electronics-11-00004/article_deploy/html/images/electronics-11-00004-g001.png" alt="" width="80%">
-
-<h4>身分驗證漏洞的手法</h4>
-<ol>
-  <li>暴力破解</li>
-  <p>暴力破解是一種攻擊方式，攻擊者使用自動化工具，反覆嘗試不同的使用者名稱和密碼組合，直到找到正確的組合為止。相對地，資格證填充則涉及使用自動化工具，測試已知的使用者名稱和密碼組合，例如從資料外洩中獲取的組合，橫跨多個網站和服務，這些組合很可能是從暗網獲得的。</p>
-  <li>Session hijacking</li>
-  <p>如果攻擊者能夠竊取會話詳細信息，那麼他們甚至在使用者離開會話之後也可以冒充該使用者。駭客獲得對互聯網會話的訪問權後，尤其在銀行交易等情境中，對使用者造成了嚴重的危險。</p>
-  <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-01-session-id-sniffing.png" alt="">
-  <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-02-session-id-spoofing.png" alt="">
-  <li>Session fixation</li>
-  <p></p>
-  <li>社群媒體帳號存取</li>
-  <p></p>
-  <li>網頁重新導向Execution after redirect (EAR)</li>
-  <p></p>
-</ol>
-
-
-<p>reference : <a href="https://feifei.tw/authentication/">[網站漏洞] 002 Broken Authentication vulnerabilities 身份驗證漏洞</a><a href="https://www.softwaresecured.com/intro-to-identification-and-authentication-failures/">Intro to Identification and Authentication Failures</a></p>
+{% block content %}
+{% load filter %}
+<div class="row">
+    <div class="col-9">
+      <h1>什麼是身份驗證漏洞</h1>
+    </div>
+    <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
+      {% if missions_complete_count == missions_info|length %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-success" style="margin: 0px 0px 15px;font-size: 22px;">
+          Complete {{ missions_complete_count }}/{{ missions_info|length }}
+      </span>
+      {% else %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-danger" style="margin: 0px 0px 15px;font-size: 22px;">
+          InComplete {{ missions_complete_count }}/{{ missions_info|length }}
+      </span>
+      {% endif %}
+  </div>
+</div>
+<hr>
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+      <h3 class="card-title">不安全的身分驗證</h3>
+      <p>由於身分和使用權控制的設計和實施不佳，易被破壞的身分驗證很廣泛，讓我們舉一個例子來說明這一點：用戶在登入畫面提示時輸入了錯誤的用戶名，但成功進入了網站，這是識別失敗的典型例子。該應用程式使用用戶名或用戶 ID 來識別註冊用戶。 <br>
+        相應地，使用者在提示下輸入了錯誤的密碼但能夠登入網站就是認證失敗的一個例子。在這種情況下，應用程式未能準確驗證使用者的身份，從而允許錯誤的身份登入。 </p>
+      <img src="https://www.mdpi.com/electronics/electronics-11-00004/article_deploy/html/images/electronics-11-00004-g001.png" alt="" width="80%" style="margin: 10px 0px;">
+      <h3>身分驗證漏洞的手法</h3>
+      <ol>
+        <li>暴力破解</li>
+        <p>暴力破解是一種攻擊方式，攻擊者使用自動化工具，反覆嘗試不同的使用者名稱和密碼組合，直到找到正確的組合為止。相對地，資格證填充則涉及使用自動化工具，測試已知的使用者名稱和密碼組合，例如從資料外洩中獲取的組合，橫跨多個網站和服務，這些組合很可能是從暗網獲得的。</p>
+        <li>Session hijacking</li>
+        <p>如果攻擊者能夠竊取會話詳細信息，那麼他們甚至在使用者離開會話之後也可以冒充該使用者。駭客獲得對互聯網會話的訪問權後，尤其在銀行交易等情境中，對使用者造成了嚴重的危險。</p>
+        <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-01-session-id-sniffing.png" alt="" style="margin: 10px 0px;">
+        <img src="https://devco.re/assets/img/blog/20140603/2014-05-16-http-session-protection-02-session-id-spoofing.png" alt="" style="margin: 10px 0px;">
+        <li>Session fixation</li>
+        <p></p>
+        <li>社群媒體帳號存取</li>
+        <p></p>
+        <li>網頁重新導向Execution after redirect (EAR)</li>
+        <p></p>
+      </ol>
+      <p>reference : <a href="https://feifei.tw/authentication/">[網站漏洞] 002 Broken Authentication vulnerabilities 身份驗證漏洞</a><a href="https://www.softwaresecured.com/intro-to-identification-and-authentication-failures/">Intro to Identification and Authentication Failures</a></p>
+        <hr>
+        {% for mission_info in missions_info %}
+        <ul>
+            <li>
+                <h5>{{ mission_info.mission.title }}</h4>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="align-items: center;">
+                                <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
+                                <div class="col-11">
+                                    <div style="width: 110px;display: inline-block;text-align: center;">
+                                        {% if mission_info.is_completed %}
+                                        <span class="badge bg-success">
+                                            <h6 style="margin: 0;">Complete</h6>
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-danger">
+                                            <h6 style="margin: 0;">Incomplete</h6>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div style="width: 110px;display: inline-block;">
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{
+                                            mission_info.attempts }}</span>
+                                    </div>
+                                    <div style="width: 185px;display: inline-block;">
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{
+                                            mission_info.last_attempt|formatTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ mission_info.mission.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#{{ mission_info.mission.alias }}">
+                                點我挑戰
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
