@@ -7,10 +7,10 @@
         <h1>Console</h1>
     </div>
     <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-        {% if missions_complete_count ==  missions_info|length %}
+        {% if missions_complete_count == missions_info|length %}
             <h2 style="margin: 15px;">Mission</h2> 
             <span class="badge bg-success" style="margin: 15px;">
-                <h4>complete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
+                <h4>Complete {{ missions_complete_count }}/{{ missions_info|length }}</h4>
             </span>
         {% else %}
             <h2 style="margin: 15px;">Mission</h2> 
@@ -38,6 +38,7 @@
                     </span>
                 {% endif %}
                 <span>嘗試次數:{{ mission_info.attempts }}</span>
+                <span>最後提交:{{ mission_info.last_attempt|formatTime }}</span>
                 <p class="card-text">{{ mission_info.mission.description }}</p>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#{{ mission_info.mission.alias }}">
