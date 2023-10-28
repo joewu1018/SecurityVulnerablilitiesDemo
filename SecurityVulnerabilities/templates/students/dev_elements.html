@@ -97,10 +97,10 @@
       <form method="post">
         {% csrf_token %}
         <div class="modal-body">
-          <p>請使用Chrome DevTools的Elements功能，查出這個矩形的實際寬度
+          <p>請使用Chrome DevTools的Elements功能，送出超過輸入框限制長度的內容
             <br>
             <br>
-            目標:請輸入矩形的實際寬度(不包括padding、border、margin)
+            目標:請輸入超過輸入框限制長度的內容
           </p>
           <div style="margin-top: 5%;">
             <label>答案：</label>&emsp;
@@ -124,44 +124,41 @@
     // 提交按鈕事件
     $(".submit-btn").click(function () {
       event.preventDefault();
-      checkAnswer();
+      var id = $(this).parents(".modal").attr("id");
+      var answer = getMissionAnswer(id);
+      checkAnswer(id, answer);
     });
 
+    // 取得任務答案
+    function getMissionAnswer(id){
+      switch (id) {
+        case "ElementsComputed":
+          return $("#computed-div").width();
+        case "OverMaxLength":
+          return 10;
+        default:
+          return 0;
+      }
+    }
+
     // 檢查答案
-    // function checkAnswer() {
-    //   var data = {
-    //     input: $("input[name='answer']").val(),
-    //     answer: $("#computed-div").width(),
-    //     question: $("input[name='question']").val(),
-    //     mission_id: $("input[name='mission_id']").val(),
-    //     csrfmiddlewaretoken: "{{ csrf_token }}",
-    //   };
-    //   AjaxCheckAnswer(data, function (response) {
-    //     $("#ElementsComputed").modal("hide");
-    //     var mission = $("#ElementsComputedLabel").text();
-    //     if (response.isCorrect) {
-    //       alertMissionComplete(mission);
-    //     } else {
-    //       alertMissionFail(mission);
-    //     }
-    //   });
-    // }
-    function checkAnswer() {
+    function checkAnswer(id, answer) {
       var data = {
-        input: $("#OverMaxLength input[name='answer']").val(),
-        answer: 10,
-        question: $("#OverMaxLength input[name='question']").val(),
-        mission_id: $("#OverMaxLength input[name='mission_id']").val(),
+        input: $("#"+ id +" input[name='answer']").val(),
+        answer: answer,
+        question: $("#"+ id +" input[name='question']").val(),
+        mission_id: $("#"+ id +" input[name='mission_id']").val(),
         csrfmiddlewaretoken: "{{ csrf_token }}",
       };
       AjaxCheckAnswer(data, function (response) {
-        $("#OverMaxLength").modal("hide");
-        var mission = $("#OverMaxLengthLabel").text();
+        $("#"+ id).modal("hide");
+        var mission = $("#"+ id +"Label").text();
         if (response.isCorrect) {
           alertMissionComplete(mission);
         } else {
           alertMissionFail(mission);
         }
+        window.location.reload();
       });
     }
   });
