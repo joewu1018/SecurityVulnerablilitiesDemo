@@ -104,6 +104,10 @@ def csrf(request):
 def broken_authentication_vulnerable(request):
     return render(request, 'students/broken_authentication.html', locals())
 
+# Broken Access Control
+def broken_access_control(request):
+    return render(request, 'students/broken_access_control.html', locals())
+
 # Devtools頁面
 def devtools(request):
     return render(request, 'students/devtools.html', locals())

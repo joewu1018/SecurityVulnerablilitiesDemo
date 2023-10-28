@@ -49,6 +49,8 @@ urlpatterns = [
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
     # Broken Authentication
     path('broken_authentication/', students.broken_authentication_vulnerable, name='BrokenAuthentication'),
+    # Broken Access Control
+    path('broken_access_control/', students.broken_access_control, name='broken_access_control'),
     # Quiz
     path('devtools/', students.devtools, name='Devtools'),
     # Devtools Elements頁籤
