@@ -21,45 +21,51 @@
         {% endif %}
     </div>
 </div>
-{% for mission_info in missions_info %}
-<ul>
-    <li>
-        <h5>{{ mission_info.mission.title }}</h4>
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+        <h3 class="card-title">Mission</h3>
         <hr>
-        <div class="card">
-            <div class="card-body">
-                <div class="row" style="align-items: center;">
-                    <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
-                    <div class="col-11">
-                      <div style="width: 110px;display: inline-block;text-align: center;">
-                        {% if mission_info.is_completed %}
-                        <span class="badge bg-success">
-                          <h6 style="margin: 0;">Complete</h6>
-                        </span>
-                        {% else %}
-                        <span class="badge bg-danger">
-                          <h6 style="margin: 0;">Incomplete</h6>
-                        </span>
-                        {% endif %}
-                      </div>
-                      <div style="width: 110px;display: inline-block;">
-                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{ mission_info.attempts }}</span>
-                      </div>
-                      <div style="width: 185px;display: inline-block;">
-                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{ mission_info.last_attempt|formatTime }}</span>
-                      </div>
+        {% for mission_info in missions_info %}
+        <ul>
+            <li>
+                <h5>{{ mission_info.mission.title }}</h4>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="align-items: center;">
+                                <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
+                                <div class="col-11">
+                                    <div style="width: 110px;display: inline-block;text-align: center;">
+                                        {% if mission_info.is_completed %}
+                                        <span class="badge bg-success">
+                                            <h6 style="margin: 0;">Complete</h6>
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-danger">
+                                            <h6 style="margin: 0;">Incomplete</h6>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div style="width: 110px;display: inline-block;">
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{mission_info.attempts }}</span>
+                                    </div>
+                                    <div style="width: 185px;display: inline-block;">
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{mission_info.last_attempt|formatTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ mission_info.mission.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#{{ mission_info.mission.alias }}">
+                                點我挑戰
+                            </button>
+                        </div>
                     </div>
-                  </div>
-                <p class="card-text">{{ mission_info.mission.description }}</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#{{ mission_info.mission.alias }}">
-                    點我挑戰
-                </button>
-            </div>
-        </div>
-    </li>
-</ul>
-{% endfor %}
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 
 
 <!-- modal視窗 -->
@@ -129,8 +135,6 @@
                 }
             });
         }
-
-
     });
 </script>
 {% endblock %}
