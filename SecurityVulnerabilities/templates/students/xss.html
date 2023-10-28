@@ -33,49 +33,10 @@
 <div class="card" style="margin: 20px 0px;">
     <div class="card-body">
         <h3 class="card-title">反射型XSS</h3>
-        <hr>
-        <br>
         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210706191745/tuxpicom1625579254.jpg" alt=""
             width="50%" style="margin: 10px 0px;">
-        <br>
         <p class="card-text">在反射型 XSS 攻擊中，攻擊者將惡意程式碼注入 Web 應用程式的易受攻擊的元件中，例如輸入欄位或 URL 參數。當受害者造訪受影響的頁面時，Web
             應用程式會將注入的程式碼反映到受害者的瀏覽器，然後受害者的瀏覽器會執行該程式碼，就好像它是頁面本身的一部分一樣。這可能允許攻擊者竊取敏感資訊，例如登入憑證，甚至控制受害者的會話。</p>
-    </div>
-</div>
-<div class="card" style="margin: 20px 0px;">
-    <div class="card-body">
-        <h3 class="card-title">儲存型XSS</h3>
-        <hr>
-        <br>
-        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210706203825/tuxpicom1625584086.jpg" alt=""
-            width="50%" style="margin: 10px 0px;">
-        <br>
-        <p class="card-text">在儲存型 XSS 攻擊中，攻擊者將惡意程式碼注入 Web
-            應用程序，然後將其儲存在伺服器上並提供給訪問受影響頁面的所有使用者。這種類型的攻擊可能特別危險，因為攻擊者可以透過一次注入來危害大量使用者。</p>
-    </div>
-</div>
-<div class="card" style="margin: 20px 0px;">
-    <div class="card-body">
-        <h3 class="card-title">DOM型XSS</h3>
-        <hr>
-        <p class="card-text">
-        <ul>
-            <li>DOM XSS 代表基於文件物件模型的跨站點腳本。基於 DOM 的漏洞發生在客戶端執行的內容處理階段，通常是在客戶端 JavaScript 中。</li>
-            <li>基於 DOM 的 XSS 的工作原理與反射型 XSS 類似 —
-                攻擊者操縱客戶端的瀏覽器環境（文件物件模型）並將有效負載放入頁面內容中。主要區別在於，由於惡意負載儲存在瀏覽器環境中，因此可能不會在伺服器端發送。這樣所有與流量分析相關的保護機制都會失效。</li>
-            <li>在反射型和儲存型跨站腳本攻擊中，您可以在回應頁面中看到漏洞惡意腳本，但在 DOM 的跨站腳本中，HTML 原始碼和攻擊的回應將是相同的，即惡意腳本無法在Web 伺服器的回應中找到。</li>
-            <li>在DOM-based XSS攻擊中，惡意字符串在網站的合法JavaScript被執行之前，不會被受害者的瀏覽器解析。要執行DOM-based
-                XSS攻擊，您需要將數據放入源以便它被傳播到一個漏洞並導致執行任意的JavaScript代碼。</li>
-        </ul>
-        </p>
-        <p>reference : <a href="https://www.linkedin.com/pulse/web-security-binesh-madharapu">網路安全</a>、<a
-            href="https://www.geeksforgeeks.org/dom-based-cross-site-scripting-attack-in-depth/">DOM-based Cross-Site
-            Scripting Attack in Depth</a></p>
-    </div>
-</div>
-<div class="card" style="margin: 20px 0px;">
-    <div class="card-body">
-        <h3 class="card-title">Mission</h3>
         <hr>
         {% for mission_info in missions_info %}
         <ul>
@@ -120,5 +81,115 @@
         {% endfor %}
     </div>
 </div>
-
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+        <h3 class="card-title">儲存型XSS</h3>
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210706203825/tuxpicom1625584086.jpg" alt=""
+            width="50%" style="margin: 10px 0px;">
+        <p class="card-text">在儲存型 XSS 攻擊中，攻擊者將惡意程式碼注入 Web
+            應用程序，然後將其儲存在伺服器上並提供給訪問受影響頁面的所有使用者。這種類型的攻擊可能特別危險，因為攻擊者可以透過一次注入來危害大量使用者。</p>
+        <hr>
+        {% for mission_info in missions_info %}
+        <ul>
+            <li>
+                <h5>{{ mission_info.mission.title }}</h4>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="align-items: center;">
+                                <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
+                                <div class="col-11">
+                                    <div style="width: 110px;display: inline-block;text-align: center;">
+                                        {% if mission_info.is_completed %}
+                                        <span class="badge bg-success">
+                                            <h6 style="margin: 0;">Complete</h6>
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-danger">
+                                            <h6 style="margin: 0;">Incomplete</h6>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div style="width: 110px;display: inline-block;">
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{
+                                            mission_info.attempts }}</span>
+                                    </div>
+                                    <div style="width: 185px;display: inline-block;">
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{
+                                            mission_info.last_attempt|formatTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ mission_info.mission.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#{{ mission_info.mission.alias }}">
+                                點我挑戰
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+        <h3 class="card-title">DOM型XSS</h3>
+        <p class="card-text">
+        <ul>
+            <li>DOM XSS 代表基於文件物件模型的跨站點腳本。基於 DOM 的漏洞發生在客戶端執行的內容處理階段，通常是在客戶端 JavaScript 中。</li>
+            <li>基於 DOM 的 XSS 的工作原理與反射型 XSS 類似 —
+                攻擊者操縱客戶端的瀏覽器環境（文件物件模型）並將有效負載放入頁面內容中。主要區別在於，由於惡意負載儲存在瀏覽器環境中，因此可能不會在伺服器端發送。這樣所有與流量分析相關的保護機制都會失效。</li>
+            <li>在反射型和儲存型跨站腳本攻擊中，您可以在回應頁面中看到漏洞惡意腳本，但在 DOM 的跨站腳本中，HTML 原始碼和攻擊的回應將是相同的，即惡意腳本無法在Web 伺服器的回應中找到。</li>
+            <li>在DOM-based XSS攻擊中，惡意字符串在網站的合法JavaScript被執行之前，不會被受害者的瀏覽器解析。要執行DOM-based
+                XSS攻擊，您需要將數據放入源以便它被傳播到一個漏洞並導致執行任意的JavaScript代碼。</li>
+        </ul>
+        </p>
+        <p>reference : <a href="https://www.linkedin.com/pulse/web-security-binesh-madharapu">網路安全</a>、<a
+            href="https://www.geeksforgeeks.org/dom-based-cross-site-scripting-attack-in-depth/">DOM-based Cross-Site
+            Scripting Attack in Depth</a></p>
+        <hr>
+        {% for mission_info in missions_info %}
+        <ul>
+            <li>
+                <h5>{{ mission_info.mission.title }}</h4>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="align-items: center;">
+                                <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
+                                <div class="col-11">
+                                    <div style="width: 110px;display: inline-block;text-align: center;">
+                                        {% if mission_info.is_completed %}
+                                        <span class="badge bg-success">
+                                            <h6 style="margin: 0;">Complete</h6>
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-danger">
+                                            <h6 style="margin: 0;">Incomplete</h6>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div style="width: 110px;display: inline-block;">
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{
+                                            mission_info.attempts }}</span>
+                                    </div>
+                                    <div style="width: 185px;display: inline-block;">
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{
+                                            mission_info.last_attempt|formatTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ mission_info.mission.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#{{ mission_info.mission.alias }}">
+                                點我挑戰
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

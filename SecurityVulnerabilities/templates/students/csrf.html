@@ -24,9 +24,7 @@
 <div class="card" style="margin: 20px 0px;">
     <div class="card-body">
         <h3 class="card-title">攻擊流程</h3>
-        <br>
         <img src="https://tech-blog.cymetrics.io/img/posts/jo/zerobased-cross-site-request-forgery/p1-1280w.webp" alt="" width="50%"style="margin: 10px 0px;">
-        <br>
         <ol>
             <li>User 訪問並登入 A 網站</li>
             <li>User 獲得 Cookie 並存至 User 瀏覽器</li>
@@ -39,11 +37,6 @@
             <li>沒有驗證或是驗證的參數可以預測（固定的 cookie ）</li>
         </ol>
         <p>reference : <a href="https://blog.techbridge.cc/2017/02/25/csrf-introduction/">讓我們來談談 CSRF</a>、<a href="https://www.stackhawk.com/blog/django-csrf-protection-guide/">Django CSRF Protection Guide: Examples and How to Enable</a> 、 <a href="https://tech-blog.cymetrics.io/posts/jo/zerobased-cross-site-request-forgery/">零基礎資安系列（一）-認識 CSRF（Cross Site Request Forgery）</a></p>
-    </div>
-</div>
-<div class="card" style="margin: 20px 0px;">
-    <div class="card-body">
-        <h3 class="card-title">Mission</h3>
         <hr>
         {% for mission_info in missions_info %}
         <ul>
