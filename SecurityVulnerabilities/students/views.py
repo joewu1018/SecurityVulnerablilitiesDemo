@@ -135,6 +135,12 @@ def check_answer(request):
         input = request.POST.get('input')
         answer = request.POST.get('answer')
         mission_id = int(request.POST.get('mission_id'))
+        if question == 'OverMaxLength':
+            if len(input) > int(answer):
+                StudentService.create_mission_record(request.user.id, mission_id, True)
+                return JsonResponse({'isCorrect': True})
+            else:
+                StudentService.create_mission_record(request.user.id, mission_id, False)
         if input == answer:
             StudentService.create_mission_record(request.user.id, mission_id, True)
             return JsonResponse({'isCorrect': True})
