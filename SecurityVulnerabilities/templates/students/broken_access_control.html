@@ -1,38 +1,104 @@
-{% extends "base.html" %} {% block title %}Broken Access Control{% endblock %}
+{% extends "base.html" %}
+{% block title %}Broken Access Control{% endblock %}
 {% block content %}
-<h1>Broken Access Control</h1>
-<p>
-    它指的是在一個應用程序或網站中，未能正確實施適當的訪問控制措施，導致未經授權的用戶或攻擊者能夠訪問、查看、修改或刪除應用程序中的敏感數據或功能。這種漏洞可能會對個人隱私和數據安全造成重大風險。
+{% load filter %}
+<div class="row">
+    <div class="col-9">
+        <h1>Broken Access Control</h1>
+    </div>
+    <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
+      {% if missions_complete_count == missions_info|length %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-success" style="margin: 0px 0px 15px;font-size: 22px;">
+          Complete {{ missions_complete_count }}/{{ missions_info|length }}
+      </span>
+      {% else %}
+      <h2 style="margin: 15px;">Mission</h2>
+      <span class="badge bg-danger" style="margin: 0px 0px 15px;font-size: 22px;">
+          InComplete {{ missions_complete_count }}/{{ missions_info|length }}
+      </span>
+      {% endif %}
+  </div>
+</div>
+<hr>
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+      <p>
+        它指的是在一個應用程序或網站中，未能正確實施適當的訪問控制措施，導致未經授權的用戶或攻擊者能夠訪問、查看、修改或刪除應用程序中的敏感數據或功能。這種漏洞可能會對個人隱私和數據安全造成重大風險。
+        
+        舉例來說，假設一個網站具有不同級別的用戶，如普通用戶和管理員。正確的訪問控制應該確保只有管理員能夠訪問和修改管理員權限下的功能，而普通用戶僅能訪問普通用戶權限下的功能。如果存在破壞的訪問控制漏洞，攻擊者可能能夠通過繞過身份驗證、修改URL或其他方式，未經授權地訪問管理員功能，這樣就可能對系統造成嚴重損害。
+      </p>
     
-    舉例來說，假設一個網站具有不同級別的用戶，如普通用戶和管理員。正確的訪問控制應該確保只有管理員能夠訪問和修改管理員權限下的功能，而普通用戶僅能訪問普通用戶權限下的功能。如果存在破壞的訪問控制漏洞，攻擊者可能能夠通過繞過身份驗證、修改URL或其他方式，未經授權地訪問管理員功能，這樣就可能對系統造成嚴重損害。
-  </p>
-
-<img src="https://media.geeksforgeeks.org/wp-content/uploads/20211208160124/accessControl-660x319.png" alt="">
-
-<h3>存取控制失效的影響</h3>
-<ul>
-  <li>
-    未經授權的存取：未經授權的個人可以存取應受到限制的敏感資料或功能，這可能會導致資料被盜、操縱或破壞。
-  </li>
-  <li>
-    權限升級：權限有限的攻擊者可以利用損壞的存取控制來提升其存取權限，從而獲得不適合他們的管理或特權權限。
-  </li>
-  <li>
-    資料外洩：如果存取控制設定不正確，可能會導致資料外洩。這意味著機密資訊可以被不應該看到的人看到。這可能會給組織帶來問題，例如財務損失、法律麻煩和聲譽受損。
-  </li>
-  <li>
-    監管不合規：資料隱私和存取控制在許多行業都受到嚴格監管。如果訪問控制被破壞並且不遵守規定，可能會受到嚴厲的經濟處罰和法律後果。
-  </li>
-</ul>
-
-<img src="https://techdocs.f5.com/dam/f5/kb/global/solutions/k44094284_images/BrokenAccessControl2.png" alt="">
-
-<p>
-  reference :
-  <a href="https://www.linkedin.com/pulse/broken-access-control-parita-patel"
-    >Broken Access Control</a
-  >、<a href="https://owasp.org/Top10/zh_TW/A01_2021-Broken_Access_Control/"
-    >A01:2021 – 權限控制失效</a
-  >
-</p>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20211208160124/accessControl-660x319.png" alt="" style="margin: 10px 0px;">
+    
+    <h3>存取控制失效的影響</h3>
+    <ul>
+      <li>
+        未經授權的存取：未經授權的個人可以存取應受到限制的敏感資料或功能，這可能會導致資料被盜、操縱或破壞。
+      </li>
+      <li>
+        權限升級：權限有限的攻擊者可以利用損壞的存取控制來提升其存取權限，從而獲得不適合他們的管理或特權權限。
+      </li>
+      <li>
+        資料外洩：如果存取控制設定不正確，可能會導致資料外洩。這意味著機密資訊可以被不應該看到的人看到。這可能會給組織帶來問題，例如財務損失、法律麻煩和聲譽受損。
+      </li>
+      <li>
+        監管不合規：資料隱私和存取控制在許多行業都受到嚴格監管。如果訪問控制被破壞並且不遵守規定，可能會受到嚴厲的經濟處罰和法律後果。
+      </li>
+    </ul>
+    
+    <img src="https://techdocs.f5.com/dam/f5/kb/global/solutions/k44094284_images/BrokenAccessControl2.png" alt="" style="margin: 10px 0px;">
+    
+    <p>
+      reference :
+      <a href="https://www.linkedin.com/pulse/broken-access-control-parita-patel"
+        >Broken Access Control</a
+      >、<a href="https://owasp.org/Top10/zh_TW/A01_2021-Broken_Access_Control/"
+        >A01:2021 – 權限控制失效</a
+      >
+    </p>
+        <hr>
+        {% for mission_info in missions_info %}
+        <ul>
+            <li>
+                <h5>{{ mission_info.mission.title }}</h4>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row" style="align-items: center;">
+                                <h5 class="card-title col-1" style="display: inline;">任務{{ forloop.counter }}</h5>
+                                <div class="col-11">
+                                    <div style="width: 110px;display: inline-block;text-align: center;">
+                                        {% if mission_info.is_completed %}
+                                        <span class="badge bg-success">
+                                            <h6 style="margin: 0;">Complete</h6>
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-danger">
+                                            <h6 style="margin: 0;">Incomplete</h6>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div style="width: 110px;display: inline-block;">
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{
+                                            mission_info.attempts }}</span>
+                                    </div>
+                                    <div style="width: 185px;display: inline-block;">
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{
+                                            mission_info.last_attempt|formatTime }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text">{{ mission_info.mission.description }}</p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#{{ mission_info.mission.alias }}">
+                                點我挑戰
+                            </button>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
