@@ -59,22 +59,28 @@
     }
 
     $("#correct-info").on('hide.bs.modal', function(){
+        var path = window.location.pathname;
         if(window.location.href.split('?')[1]){
             // 如果任務成功且網址有參數，則重新導向無參數的網址
             window.location = window.location.href.split('?')[0];
             return;
         }
-        if(window.location.pathname == '/board/'){
+        if(path == '/board/'){
             window.location = '/xss/';
+            return;
+        }
+        if(path == '/grade_search/'){
+            window.location = '/sql_injection/';
             return;
         }
         window.location.reload();
     });
     $("#wrong-info").on('hide.bs.modal', function(){
+        var path = window.location.pathname;
         if(window.location.href.split('?')[1]){      
             return;
         }
-        if(window.location.pathname == '/board/'){
+        if(path == '/board/' || path == '/grade_search/'){
             return;
         }
         window.location.reload();

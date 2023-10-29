@@ -62,9 +62,11 @@
 
 <script>
   $(document).ready(function() {
-    var hacked = "{{ hacked }}" == "True" ? true : false;
-    if(hacked){
-      alertMissionComplete("aaa");
+    var SQLInjection_hacked = "{{ SQLInjection_hacked }}"
+    if(SQLInjection_hacked == "True"){
+      alertMissionComplete("任務1SQL Injection");
+    }else if(SQLInjection_hacked == "False"){
+      alertMissionFail("任務1SQL Injection");
     }
   });
 </script>

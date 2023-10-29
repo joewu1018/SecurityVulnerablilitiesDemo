@@ -43,10 +43,14 @@ def grade_search(request):
             noResult = len(results) == 0
 
             # 有沒有查詢到其他學生的成績 有 => 成功SQL Injection
-            hacked = False
             for result in results:
                 if result.studentId != student.studentId and "or" in studentId.lower():
-                    hacked = True
+                    StudentService.create_mission_record(request.user.id, 9, True)
+                    SQLInjection_hacked = True
+                    break
+                else:
+                    StudentService.create_mission_record(request.user.id, 9, False)
+                    SQLInjection_hacked = False
                     break
         # 驗證不通過
         else:
@@ -114,6 +118,8 @@ def xss_vulnerable(request):
 
 # SQL Injection
 def sql_injection_vulnerable(request):
+    category_id = MissionCategory.objects.get(title='SQL Injection').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/sql_injection.html', locals())
 
 # CSRF

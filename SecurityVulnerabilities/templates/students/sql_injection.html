@@ -113,4 +113,28 @@
     </div>
 </div>
 
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+<!-- SQLInjection -->
+<div class="modal fade" id="SQLInjection" tabindex="-1" aria-labelledby="SQLInjectionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SQLInjectionLabel"><strong>任務1</strong><br>SQL Injection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>請利用SQL Injection的漏洞，成功一次查出所有學生的成績
+                    <br>
+                    <br>
+                    目標:請至學生歷年成績查詢頁面，成功一次查出所有學生的成績
+                </p>
+                <a href="{% url 'GradeSearch' %}" class="btn btn-primary">前往學生歷年成績查詢</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
