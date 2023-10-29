@@ -67,8 +67,12 @@ def grade_search(request):
     return render(request, "students/grade_search.html", locals())
 
 # 學生資料維護
-def student_maintenance(request):
-    student = Student.objects.get(id=request.user.id)
+def student_maintenance(request, id):
+    student = Student.objects.get(id=id)
+    # 如果id是1代表是admin，成功Broken Access Control
+    if id == 1:
+        StudentService.create_mission_record(request.user.id, 10, True)
+        BrokenAccessControl_hacked = True
     if request.method == 'POST':
         # 用ModelForm建立表單，並用POST的資料做驗證
         form = StudentsForm(request.POST, instance=student)
@@ -132,6 +136,8 @@ def broken_authentication_vulnerable(request):
 
 # Broken Access Control
 def broken_access_control(request):
+    category_id = MissionCategory.objects.get(title='Broken Access Control').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/broken_access_control.html', locals())
 
 # Devtools頁面

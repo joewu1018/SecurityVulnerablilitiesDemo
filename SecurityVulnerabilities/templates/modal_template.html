@@ -68,11 +68,14 @@
         if(path == '/board/'){
             window.location = '/xss/';
             return;
-        }
-        if(path == '/grade_search/'){
+        }else if(path == '/grade_search/'){
             window.location = '/sql_injection/';
             return;
+        }else if(path == '/student_maintenance/1/'){
+            window.location = '/broken_access_control/';
+            return;
         }
+
         window.location.reload();
     });
     $("#wrong-info").on('hide.bs.modal', function(){

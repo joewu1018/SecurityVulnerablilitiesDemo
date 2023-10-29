@@ -61,7 +61,7 @@
                             <a href="{% url 'SqlInjection' %}" class="nav-link" style="color: #000000;">SQL Injection</a>
                         </li>
                         <li>
-                            <a href="{% url 'StudentMaintenance' %}" class="nav-link" style="color: #000000;">學生資料維護</a>
+                            <a href="{% url 'StudentMaintenance' request.user.id %}" class="nav-link" style="color: #000000;">學生資料維護</a>
                         </li>
                         <li>
                             <a href="{% url 'GradeSearch' %}" class="nav-link" style="color: #000000;">學生歷年成績查詢</a>

@@ -104,4 +104,29 @@
       {% endfor %}
   </div>
 </div>
+
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+<!-- BrokenAccessControl -->
+<div class="modal fade" id="BrokenAccessControl" tabindex="-1" aria-labelledby="BrokenAccessControlLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BrokenAccessControlLabel"><strong>任務1</strong><br>Broken Access Control</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>請利用Broken Access Control的漏洞，成功造訪admin學生資料維護頁面
+                    <br>
+                    <br>
+                    目標:成功造訪admin學生資料維護頁面(student_maintenance)
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

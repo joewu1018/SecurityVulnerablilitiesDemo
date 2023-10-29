@@ -38,13 +38,13 @@ urlpatterns = [
     # 學生成績查詢
     path('grade_search/', students.grade_search, name='GradeSearch'),
     # 學生資料維護
-    path('student_maintenance/', students.student_maintenance, name='StudentMaintenance'),
+    path('student_maintenance/<int:id>/', students.student_maintenance, name='StudentMaintenance'),
     # 留言板
     path('board/', students.board, name='Board'),
     # XSS
     path('xss/', students.xss_vulnerable, name='XSS'),
     # CSRF
-    path('Csrf/', students.csrf, name='csrf'),
+    path('csrf/', students.csrf, name='csrf'),
     # SQL Injection
     path('sql_injection/', students.sql_injection_vulnerable, name='SqlInjection'),
     # Broken Authentication

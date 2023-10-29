@@ -40,4 +40,15 @@
   </div>
 </form>
 
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+
+<script>
+  $(document).ready(function () {
+    var BrokenAccessControl_hacked = "{{ BrokenAccessControl_hacked }}";
+    if (BrokenAccessControl_hacked == "True") {
+      alertMissionComplete("Broken Access Control");
+    }
+  });
+</script>
 {% endblock %}
