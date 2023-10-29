@@ -15,7 +15,8 @@
         </ul>
         </p>
     </div>
-    <div class="col-3" style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
+    <div class="col-3"
+        style="text-align: center;background-color: #e3e3e381;width: 20%;height: 130px;border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;margin: 0px 30px;">
         {% if missions_complete_count == missions_info|length %}
         <h2 style="margin: 15px;">Mission</h2>
         <span class="badge bg-success" style="margin: 0px 0px 15px;font-size: 22px;">
@@ -69,8 +70,9 @@
         </ul>
         </p>
         <p>reference : <a href="https://www.linkedin.com/pulse/web-security-binesh-madharapu">網路安全</a>、<a
-            href="https://www.geeksforgeeks.org/dom-based-cross-site-scripting-attack-in-depth/">DOM-based Cross-Site
-            Scripting Attack in Depth</a></p>
+                href="https://www.geeksforgeeks.org/dom-based-cross-site-scripting-attack-in-depth/">DOM-based
+                Cross-Site
+                Scripting Attack in Depth</a></p>
     </div>
 </div>
 <div class="card" style="margin: 20px 0px;">
@@ -99,12 +101,10 @@
                                         {% endif %}
                                     </div>
                                     <div style="width: 110px;display: inline-block;">
-                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{
-                                            mission_info.attempts }}</span>
+                                        <span class="badge text-bg-info" style="font-size: 16px;">嘗試次數:{{ mission_info.attempts }}</span>
                                     </div>
                                     <div style="width: 185px;display: inline-block;">
-                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{
-                                            mission_info.last_attempt|formatTime }}</span>
+                                        <span class="badge text-bg-warning" style="font-size: 16px;">最後提交:{{ mission_info.last_attempt|formatTime }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -113,6 +113,11 @@
                                 data-bs-target="#{{ mission_info.mission.alias }}">
                                 點我挑戰
                             </button>
+                            {% if forloop.counter == 1 %}
+                            <div style="margin-top:15px;">
+                                <p style="margin-bottom: 0px;">你輸入的內容為:<span>{{ input|safe }}</span></p>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
             </li>
@@ -121,4 +126,136 @@
     </div>
 </div>
 
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+<!-- ReflectedXSS -->
+<div class="modal fade" id="ReflectedXSS" tabindex="-1" aria-labelledby="ReflectedXSSLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ReflectedXSSLabel"><strong>任務1</strong><br>反射型XSS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>請利用反射型XSS的漏洞，成功製造XSS攻擊
+                    <br>
+                    <br>
+                    目標:請利用查詢按鈕，觀察網址列的參數更改input參數的值，讓網頁跳出alert視窗顯示XSS(字串使用'')
+                </p>
+                <div style="margin-top: 5%;">
+                    <a href="{% url 'XSS'%}?input=ntuemie&question=ReflectedXSS&mission_id=6" class="btn btn-primary">查詢</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- DOM-basedXSS -->
+<div class="modal fade" id="DOM-basedXSS" tabindex="-1" aria-labelledby="DOM-basedXSSLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DOM-basedXSSLabel"><strong>任務2</strong><br>DOM型XSS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>請利用DOM型XSS的漏洞，成功製造XSS攻擊
+                        <br>
+                        <br>
+                        目標:請讓網頁跳出alert視窗顯示XSS(字串使用'')
+                    </p>
+                    <div style="margin-top: 5%;">
+                        <label>答案：</label>&emsp;
+                        <input type="text" name="answer" class="form-control" style="width: 60%; display: inline;">
+                        <input type="hidden" name="question" value="DOM-basedXSS">
+                        <input type="hidden" name="mission_id" value="7">
+                    </div>
+                    <p>你輸入的內容為:<span id="DOM_message"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+                    <button type="button" class="btn btn-success submit-btn">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- StoredXSS -->
+<div class="modal fade" id="StoredXSS" tabindex="-1" aria-labelledby="StoredXSSLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="StoredXSSLabel"><strong>任務3</strong><br>儲存型XSS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>請利用儲存型XSS的漏洞，成功製造XSS攻擊
+                    <br>
+                    <br>
+                    目標:請至留言板留言，並讓所有使用者進入留言板皆會跳出alert視窗顯示XSS(字串使用'')
+                </p>
+                <a href="{% url 'Board' %}" class="btn btn-primary">前往留言板</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">離開</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // ReflectedXSS 從後端判斷是否成功
+        var ReflectedXSS_hacked = "{{ ReflectedXSS_hacked }}";
+        if (ReflectedXSS_hacked == "True") {
+            alertMissionComplete($("#ReflectedXSSLabel").text());
+        }else if(ReflectedXSS_hacked == "False"){
+            alertMissionFail($("#ReflectedXSSLabel").text());
+        }
+        
+        // 提交按鈕事件
+        $(".submit-btn").click(function () {
+            var id = $(this).parents(".modal").attr("id");
+            var answer = getMissionAnswer(id);
+            checkAnswer(id, answer);
+        });
+
+        // 取得任務答案
+        function getMissionAnswer(id) {
+            switch (id) {
+                case "DOM-basedXSS":
+                    return "\x3Cscript>alert('XSS')\x3C/script>";
+                default:
+                    return 0;
+            }
+        }
+
+        // 檢查答案
+        function checkAnswer(id, answer) {
+            var data = {
+                input: $("#" + id + " input[name='answer']").val(),
+                answer: answer,
+                question: $("#" + id + " input[name='question']").val(),
+                mission_id: $("#" + id + " input[name='mission_id']").val(),
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            };
+
+            AjaxCheckAnswer(data, function (response) {
+                var mission = $("#" + id + "Label").text();
+                if (response.isCorrect) {
+                    $("#" + id).modal("hide");
+                    alertMissionComplete(mission);
+                } else {
+                    $("#DOM_message").html(response.input);
+                    // alertMissionFail(mission);
+                }
+            });
+            
+        }
+    });
+</script>
 {% endblock %}

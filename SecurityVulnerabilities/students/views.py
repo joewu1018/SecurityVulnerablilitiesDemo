@@ -81,15 +81,35 @@ def board(request):
         content = request.POST.get('content')
         board = Board.objects.create(author=author, content=content)
         board.save()
-        return redirect(reverse('Board'))
-    else:
-        boards = Board.objects.all()
+        if content.replace(';', '') == "<script>alert('XSS')</script>":
+            StudentService.create_mission_record(request.user.id, 8, True)
+            StoredXSS_hacked = True
+        else:
+            StudentService.create_mission_record(request.user.id, 8, False)
+            StoredXSS_hacked = False
+        # return redirect(reverse('Board'))
+    boards = Board.objects.all()
     return render(request, 'students/board.html', locals())
 
 # XSS
 def xss_vulnerable(request):
+    # 從check_answer傳來的POST請求(DOM-based XSS 錯誤)
     if request.method == 'POST':
-        message = request.POST.get('message')
+        input = request.POST.get('input')
+        return JsonResponse({'isCorrect': False, 'input': input})
+    input = request.GET.get('input')
+
+    # 確認input有沒有值(沒有值代表進入頁面) 且 不是預設的值(預設的不計算ReflectedXSS作答紀錄)
+    if input and input != "ntuemie":
+        mission_id = request.GET.get('mission_id')
+        if input.replace(';', '') == "<script>alert('XSS')</script>":
+            StudentService.create_mission_record(request.user.id, mission_id, True)
+            ReflectedXSS_hacked = True
+        else:
+            StudentService.create_mission_record(request.user.id, mission_id, False)
+            ReflectedXSS_hacked = False
+    category_id = MissionCategory.objects.get(title='XSS').id
+    missions_info, missions_complete_count = StudentService.get_missions_info(request.user.id, category_id)
     return render(request, 'students/xss.html', locals())
 
 # SQL Injection
@@ -149,6 +169,13 @@ def check_answer(request):
                 return JsonResponse({'isCorrect': True})
             else:
                 StudentService.create_mission_record(request.user.id, mission_id, False)
+        elif question == 'DOM-basedXSS':
+            if input.replace(';', '') == answer:
+                StudentService.create_mission_record(request.user.id, mission_id, True)
+                return JsonResponse({'isCorrect': True})
+            else:
+                StudentService.create_mission_record(request.user.id, mission_id, False)
+                return xss_vulnerable(request)
         if input == answer:
             StudentService.create_mission_record(request.user.id, mission_id, True)
             return JsonResponse({'isCorrect': True})

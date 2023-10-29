@@ -40,4 +40,18 @@
 <br>
 {% endfor %}
 
+<!-- modal視窗 -->
+{% include 'modal_template.html' %}
+
+<script>
+    $(document).ready(function () {
+        // StoredXSSXSS 從後端判斷是否成功
+        var StoredXSS_hacked = "{{ StoredXSS_hacked }}";
+        if (StoredXSS_hacked == "True") {
+            alertMissionComplete("任務3儲存型XSS");
+        }else if(StoredXSS_hacked == "False"){
+            alertMissionFail("任務3儲存型XSS");
+        }
+    });
+</script>
 {% endblock %}

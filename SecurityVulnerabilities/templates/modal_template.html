@@ -57,4 +57,26 @@
             success: successCallback,
         });
     }
+
+    $("#correct-info").on('hide.bs.modal', function(){
+        if(window.location.href.split('?')[1]){
+            // 如果任務成功且網址有參數，則重新導向無參數的網址
+            window.location = window.location.href.split('?')[0];
+            return;
+        }
+        if(window.location.pathname == '/board/'){
+            window.location = '/xss/';
+            return;
+        }
+        window.location.reload();
+    });
+    $("#wrong-info").on('hide.bs.modal', function(){
+        if(window.location.href.split('?')[1]){      
+            return;
+        }
+        if(window.location.pathname == '/board/'){
+            return;
+        }
+        window.location.reload();
+    });
 </script>
