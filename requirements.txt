@@ -1,4 +1,3 @@
 django
 python-dotenv
 mssql-django
-sqlite-devel
