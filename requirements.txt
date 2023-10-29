@@ -1,3 +1,4 @@
 django
 python-dotenv
 mssql-django
+python==3.10
