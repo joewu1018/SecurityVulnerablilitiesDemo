@@ -21,6 +21,61 @@
         {% endif %}
     </div>
 </div>
+
+<div class="card" style="margin: 20px 0px;">
+    <div class="card-body">
+
+        <h2>Chrome Devtools 開發者工具功能介紹-source</h2>
+        <h3>Debug 流程</h3>
+        <ol>
+            <li>發現（重現）Bug</li>
+            <li>利用 Source 選擇要中斷的事件</li>
+            <p>輸入快捷鍵Cmd + Option + I (Windows： Ctrl + Shift + I)，右手邊即出現控制台的
+    
+                source版面 -> 展開 Event Listener Breakpoints -> 點擊 Mouse，選取 click -> 回到 Demo
+     
+     畫面，再次點擊 Add 按紐，此時 Devtools 會暫停執行，停止在 function onClick() 。</p>
+            <li>檢查原始碼</li>
+            <ul>
+                <li> Resume script execution鍵：繼續執行程式碼，直到遇到另一個斷點。</li>
+                <li>Step over鍵 ：執行程式碼的下一步，若遇到函式會視函式為一個完整的步驟，將函式執行完才停止</li>
+                <li>Step into鍵 ：執行程式碼的下一步，遇到函式就進入並且繼續單步執行</li>
+                <li>Step out鍵 ：跳出函式</li>
+                <li>Deactivate breakpoints鍵 ：切換斷點啟用或禁用狀態</li>
+            </ul>
+        </ol>
+        <h3>設定斷點（breakpoint）</h3>
+        <p>當懷疑某一函式 （ updateLabel() ）中的程式碼有問題時，點擊行號（ 32 ）設置斷點，
+    
+            程式碼會在執行到這一行時中斷，並出現相關訊息。</p>
+        <img src="https://www.astralweb.com.tw/wp-content/uploads/2017/12/Chrome-Devtools-3.png" alt="">
+        <h3>利用 watch 輸出某變項或 expression 監控變項的變化，再使用 console 版面確認問題</h3>
+        <p>展開 Watch -> 點擊 ＋ Add expression （初次展開是空的）-> 輸入 typeof sum，會回傳
+    
+            Typeof sum: “string”   
+            
+            ＊這驗證了我們所想 sum 的值為字串非數字</p>
+        <img src="https://www.astralweb.com.tw/wp-content/uploads/2017/12/Chrome-Devtools-4.png" alt="">
+        <p>開啟 console 版面 -> 輸入 parseInt(addend1) + parseInt(addend2)，回傳 7 ＊正確</p>
+        <img src="https://www.astralweb.com.tw/wp-content/uploads/2017/12/Chrome-Devtools-1.png" alt="">
+    
+        <h3>修復 Bug</h3>
+        <p>回到 Source 版面 將程式碼 var sum = addend1 + addend2
+    
+            修改為 var sum = parseInt(addend1) + parseInt(addend2);
+            <br>
+            -> 修改完成後，保存變動 Command + S 、 Window : Control + S </p>
+        
+        <h3>取消斷點，再次執行，確定錯誤是否修正</h3>
+        <p>點擊  Deactivate breakpoints 鍵取消所有設置的斷點
+            <br>
+            -> 點擊  Resume script execution 鍵，輸入不同的數值試試看結果應該顯示正常的數值喔！</p>
+
+
+        <p>reference : <a href="https://www.astralweb.com.tw/chrome-devtools-developer-tools-source/">Chrome Devtools 開發者工具功能介紹-source</a>、<a href="https://developer.chrome.com/docs/devtools/sources/">Sources panel overview</a></p>
+    </div>
+</div>
+
 <div class="card" style="margin: 20px 0px;">
     <div class="card-body">
         <h3 class="card-title">Mission</h3>
